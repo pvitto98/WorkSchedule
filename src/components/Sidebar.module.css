@@ -1,0 +1,147 @@
+.image2Icon {
+  width: 22.5px;
+  height: 22px;
+  position: relative;
+  object-fit: cover;
+}
+.imageHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-12xs);
+}
+.tabellaLavoro {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 127px;
+}
+.logo,
+.logoWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.logo {
+  overflow: hidden;
+  align-items: flex-end;
+  gap: var(--gap-xs-6);
+}
+.logoWrapper {
+  align-items: flex-start;
+  padding: 0 var(--padding-17xl);
+}
+.sidebarChild {
+  align-self: stretch;
+  height: 1px;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.image4Icon {
+  height: 30px;
+  width: 30.5px;
+  position: relative;
+  object-fit: contain;
+}
+.dashboard1 {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 63px;
+}
+.dashboardLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-7xs) 0 0;
+}
+.dashboard,
+.signUpIconBackground {
+  background-color: var(--blackampwhite-white);
+}
+.dashboard {
+  align-self: stretch;
+  box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.25);
+  border-radius: var(--br-mini);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) var(--padding-3xs);
+  gap: var(--gap-mini);
+}
+.signUpIconBackground {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.02);
+  border-radius: var(--br-xs);
+}
+.ioniconrrocketsharp {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  margin: 0 !important;
+  top: calc(50% - 7.5px);
+  left: 7.5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.logOut {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 45.5px;
+}
+.signOutLabel,
+.signUp {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.signOutLabel {
+  flex-direction: column;
+  padding: var(--padding-7xs) 0 0;
+}
+.signUp {
+  overflow: hidden;
+  flex-direction: row;
+  position: relative;
+  gap: var(--gap-xs);
+  color: var(--gray-gray-400);
+}
+.menu {
+  width: 220px;
+  flex-direction: column;
+  padding: 0 var(--padding-3xs) 0 0;
+  box-sizing: border-box;
+  gap: var(--gap-6xl);
+}
+.menu,
+.menuWrapper,
+.sidebar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.menuWrapper {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 0 var(--padding-6xs) 0 var(--padding-7xs);
+  font-size: var(--font-size-xs);
+}
+.sidebar {
+  width: 233.3px;
+  flex-direction: column;
+  gap: var(--gap-5xl-5);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--gray-gray-700);
+  font-family: var(--font-helvetica);
+}

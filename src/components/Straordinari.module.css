@@ -1,0 +1,42 @@
+.straordinari1 {
+  position: relative;
+  line-height: 140%;
+  display: inline-block;
+  min-width: 107px;
+}
+.image1Icon {
+  height: 384.5px;
+  width: 800px;
+  position: relative;
+  object-fit: cover;
+  max-width: 113%;
+  flex-shrink: 0;
+}
+.graficostraordinari,
+.straordinari {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.graficostraordinari {
+  align-self: stretch;
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+}
+.straordinari {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-5xl);
+  min-width: 335px;
+  text-align: left;
+  font-size: var(--font-size-lg-8);
+  color: var(--gray-gray-700);
+  font-family: var(--font-helvetica);
+}
+@media screen and (max-width: 450px) {
+  .graficostraordinari {
+    gap: var(--gap-10xl);
+  }
+}

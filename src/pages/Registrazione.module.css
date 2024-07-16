@@ -1,0 +1,521 @@
+.immagineloginIcon {
+  height: 1052px;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  object-fit: cover;
+  min-width: 624px;
+}
+.registrati1 {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-13xl);
+  font-weight: 700;
+  font-family: var(--font-helvetica);
+  color: var(--gray-gray-700);
+  text-align: center;
+}
+.registerWith,
+.registrationOptions,
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.registerWith,
+.title {
+  overflow: hidden;
+  justify-content: flex-start;
+}
+.registrationOptions {
+  align-self: stretch;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+}
+.nome {
+  position: relative;
+  font-size: var(--font-size-sm);
+  line-height: 20px;
+  font-family: var(--font-helvetica);
+  color: var(--gray-gray-700);
+  text-align: left;
+  display: inline-block;
+  min-width: 38px;
+}
+.inputRows {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-9xs);
+}
+.inserisciIlTuo {
+  width: 124px;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-helvetica);
+  font-size: var(--font-size-sm);
+  background-color: transparent;
+  height: 20px;
+  position: relative;
+  line-height: 140%;
+  color: var(--gray-gray-400);
+  text-align: left;
+  display: inline-block;
+  padding: 0;
+}
+.passwordTextIcon {
+  width: 35px;
+  height: 3.5px;
+  position: relative;
+  display: none;
+}
+.content {
+  height: 0;
+  width: 0;
+  position: relative;
+}
+.minwidth {
+  height: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  flex-direction: row;
+  padding: 0 var(--padding-55xl);
+  box-sizing: border-box;
+}
+.inputfieldtext,
+.minwidth,
+.name,
+.name1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.inputfieldtext {
+  flex: 1;
+  overflow: hidden;
+  flex-direction: column;
+}
+.name,
+.name1 {
+  align-self: stretch;
+}
+.name1 {
+  border-radius: var(--br-mini);
+  background-color: var(--blackampwhite-white);
+  border: 1px solid var(--gray-gray-200);
+  overflow: hidden;
+  flex-direction: row;
+  padding: var(--padding-smi) var(--padding-lg) var(--padding-smi)
+    var(--padding-lgi);
+}
+.name {
+  flex-direction: column;
+  gap: 5px;
+}
+.email1 {
+  position: relative;
+  font-size: var(--font-size-sm);
+  line-height: 140%;
+  font-family: var(--font-helvetica);
+  color: var(--gray-gray-700);
+  text-align: left;
+  display: inline-block;
+  min-width: 35.5px;
+}
+.emailWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-9xs);
+}
+.inserisciLaTua {
+  width: 127px;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-helvetica);
+  font-size: var(--font-size-sm);
+  background-color: transparent;
+  height: 20px;
+  position: relative;
+  line-height: 140%;
+  color: var(--gray-gray-400);
+  text-align: left;
+  display: inline-block;
+  padding: 0;
+}
+.passwordTextIcon1 {
+  width: 35px;
+  height: 3.5px;
+  position: relative;
+  display: none;
+}
+.content1 {
+  height: 0;
+  width: 0;
+  position: relative;
+}
+.minwidth1 {
+  height: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  flex-direction: row;
+  padding: 0 var(--padding-55xl);
+  box-sizing: border-box;
+}
+.email,
+.email2,
+.inputfieldtext1,
+.minwidth1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.inputfieldtext1 {
+  flex: 1;
+  overflow: hidden;
+  flex-direction: column;
+}
+.email,
+.email2 {
+  align-self: stretch;
+}
+.email2 {
+  border-radius: var(--br-mini);
+  background-color: var(--blackampwhite-white);
+  border: 1px solid var(--gray-gray-200);
+  overflow: hidden;
+  flex-direction: row;
+  padding: var(--padding-smi) var(--padding-lg) var(--padding-smi)
+    var(--padding-lgi);
+}
+.email {
+  flex-direction: column;
+  gap: var(--gap-7xs-5);
+}
+.password1 {
+  position: relative;
+  font-size: var(--font-size-sm);
+  line-height: 140%;
+  font-family: var(--font-helvetica);
+  color: var(--gray-gray-700);
+  text-align: left;
+  display: inline-block;
+  min-width: 61.5px;
+}
+.passwordWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-9xs);
+}
+.inserisciLaTua1 {
+  width: 154px;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-helvetica);
+  font-size: var(--font-size-sm);
+  background-color: transparent;
+  height: 20px;
+  position: relative;
+  line-height: 140%;
+  color: var(--gray-gray-400);
+  text-align: left;
+  display: inline-block;
+  padding: 0;
+}
+.passwordTextIcon2 {
+  width: 35px;
+  height: 3.5px;
+  position: relative;
+  display: none;
+}
+.content2 {
+  height: 0;
+  width: 0;
+  position: relative;
+}
+.minwidth2 {
+  height: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  flex-direction: row;
+  padding: 0 var(--padding-55xl);
+  box-sizing: border-box;
+}
+.email3,
+.inputfieldtext2,
+.minwidth2,
+.password {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.inputfieldtext2 {
+  flex: 1;
+  overflow: hidden;
+  flex-direction: column;
+}
+.email3,
+.password {
+  align-self: stretch;
+}
+.email3 {
+  border-radius: var(--br-mini);
+  background-color: var(--blackampwhite-white);
+  border: 1px solid var(--gray-gray-200);
+  overflow: hidden;
+  flex-direction: row;
+  padding: var(--padding-smi) var(--padding-lg) var(--padding-smi)
+    var(--padding-lgi);
+}
+.password {
+  flex-direction: column;
+  gap: var(--gap-7xs-5);
+}
+.toggleCircle {
+  width: 13.5px;
+  height: 13.5px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--blackampwhite-white);
+}
+.switchbase {
+  height: 18.5px;
+  width: 36px;
+  border-radius: 97.74px;
+  background-color: var(--teal-teal-300);
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--padding-11xs-4) var(--padding-11xs) var(--padding-11xs-4)
+    var(--padding-12xs);
+  box-sizing: border-box;
+}
+.ricordami {
+  flex: 1;
+  position: relative;
+  font-size: var(--font-size-xs);
+  line-height: 150%;
+  font-family: var(--font-helvetica);
+  color: var(--gray-gray-700);
+  text-align: left;
+  flex-shrink: 0;
+}
+.rememberMe,
+.rememberMe1 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.rememberMe1 {
+  width: 125.5px;
+  justify-content: flex-start;
+  gap: 10.1px;
+}
+.rememberMe {
+  align-self: stretch;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+}
+.div {
+  position: relative;
+  font-size: var(--font-size-2xs);
+  line-height: 12px;
+  font-family: var(--font-font-awesome-5-free);
+  color: var(--color-black);
+  text-align: center;
+}
+.icon {
+  height: 8px;
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.div1,
+.text {
+  position: relative;
+  text-align: center;
+}
+.text {
+  flex: 1;
+  font-size: var(--font-size-3xs);
+  line-height: 150%;
+  font-family: var(--font-helvetica);
+  color: var(--blackampwhite-white);
+}
+.div1 {
+  font-size: var(--font-size-2xs);
+  line-height: 12px;
+  font-family: var(--font-font-awesome-5-free);
+  color: var(--color-black);
+}
+.icon1 {
+  height: 8px;
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.buttonBody,
+.heightStructure {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.buttonBody {
+  flex: 1;
+  overflow: hidden;
+  align-items: flex-start;
+  gap: var(--gap-9xs);
+}
+.heightStructure {
+  align-self: stretch;
+  align-items: center;
+  padding: var(--padding-8xs-5) 0;
+}
+.content3 {
+  height: 0;
+  width: 0;
+  position: relative;
+  background-color: var(--color-silver);
+}
+.minwidth3 {
+  height: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-xs);
+  box-sizing: border-box;
+}
+.buttonbase,
+.widthStructure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.widthStructure {
+  width: 41.5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.buttonbase {
+  cursor: pointer;
+  border: 0;
+  padding: 10.5px var(--padding-xl);
+  background-color: var(--teal-teal-300);
+  align-self: stretch;
+  border-radius: var(--br-xs);
+  flex-direction: row;
+}
+.b,
+.haiGiaUn {
+  font-family: var(--font-helvetica);
+}
+.haiGiaUnAccount {
+  color: var(--gray-gray-400);
+}
+.accedi1 {
+  color: var(--teal-teal-300);
+}
+.accedi {
+  font-family: var(--font-helvetica);
+}
+.haiGiaUnContainer {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-sm);
+  line-height: 140%;
+  text-align: center;
+}
+.inputcontainer,
+.registrati {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.registrati {
+  margin: 0;
+  width: 350px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-9xl);
+}
+.inputcontainer {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+  box-sizing: border-box;
+}
+.credentials,
+.logincontent,
+.registrazione {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.credentials {
+  flex: 1;
+  flex-direction: column;
+  padding: 269.5px 0 0;
+  box-sizing: border-box;
+  min-width: 624px;
+  max-width: 100%;
+}
+.logincontent,
+.registrazione {
+  flex-direction: row;
+}
+.logincontent {
+  flex: 1;
+  flex-wrap: wrap;
+  max-width: 100%;
+  row-gap: 20px;
+}
+.registrazione {
+  width: 100%;
+  position: relative;
+  background-color: var(--blackampwhite-white);
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 750px) {
+  .immagineloginIcon {
+    height: 300px;
+    min-width: 100%;
+  }
+  .registrati1 {
+    font-size: var(--font-size-7xl);
+  }
+  .credentials {
+    padding-top: 175px;
+    box-sizing: border-box;
+    min-width: 100%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .immagineloginIcon {
+    height: 200px;
+  }
+  .registrati1 {
+    font-size: var(--font-size-lgi);
+  }
+  .credentials {
+    padding-top: 114px;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,67 @@
+.emailPasswordFieldsWrapper {
+  width: 353px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 304.8px 0 0;
+  box-sizing: border-box;
+  min-width: 353px;
+  max-width: 100%;
+}
+.immagineloginIcon {
+  width: 960px;
+  position: relative;
+  max-height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+}
+.login {
+  width: 100%;
+  position: relative;
+  background-color: var(--blackampwhite-white);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 0 0 303px;
+  box-sizing: border-box;
+  line-height: normal;
+  letter-spacing: normal;
+  gap: var(--gap-xl);
+}
+@media screen and (max-width: 1700px) {
+  .emailPasswordFieldsWrapper,
+  .immagineloginIcon {
+    flex: 1;
+  }
+}
+@media screen and (max-width: 1625px) {
+  .emailPasswordFieldsWrapper,
+  .immagineloginIcon {
+    flex: 1;
+  }
+  .login {
+    flex-wrap: wrap;
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    padding-bottom: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 1325px) {
+  .login {
+    flex-wrap: wrap;
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    padding-bottom: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 900px) {
+  .emailPasswordFieldsWrapper {
+    padding-top: 198px;
+    box-sizing: border-box;
+    min-width: 100%;
+  }
+}

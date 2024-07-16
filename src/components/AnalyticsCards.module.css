@@ -1,0 +1,92 @@
+.anno2024,
+.cambiaAnno {
+  position: relative;
+  line-height: 140%;
+}
+.cambiaAnno {
+  font-size: var(--font-size-base);
+  display: inline-block;
+  color: var(--color-sienna);
+  min-width: 101px;
+}
+.yearSelector {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+  font-size: var(--font-size-11xl);
+}
+.riassunto {
+  position: relative;
+  line-height: 140%;
+  display: inline-block;
+  min-width: 91px;
+}
+.yearDataContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-3xs) 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  font-size: var(--font-size-xs);
+  color: var(--gray-gray-400);
+}
+.yearSummary {
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+}
+.analyticsCards,
+.graficiaggregati,
+.yearSummary {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.graficiaggregati {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0 var(--padding-9xs) 0 0;
+  box-sizing: border-box;
+  gap: 50px 48px;
+}
+.analyticsCards {
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--gap-6xl);
+  text-align: left;
+  font-size: var(--font-size-lg-8);
+  color: var(--gray-gray-700);
+  font-family: var(--font-helvetica);
+}
+@media screen and (max-width: 900px) {
+  .anno2024 {
+    font-size: var(--font-size-5xl);
+    line-height: 34px;
+  }
+  .graficiaggregati {
+    gap: var(--gap-5xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .anno2024 {
+    font-size: var(--font-size-lg);
+    line-height: 25px;
+  }
+  .yearSelector {
+    flex-wrap: wrap;
+  }
+  .yearDataContainer {
+    max-width: 100%;
+    row-gap: 10px;
+  }
+}

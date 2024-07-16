@@ -1,0 +1,123 @@
+.span {
+  color: var(--color-black);
+}
+.dashboard {
+  color: var(--gray-gray-700);
+  white-space: pre-wrap;
+}
+.breadcrumb1 {
+  width: 110px;
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.breadcrumbitemprevious {
+  width: 45px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+}
+.dashboard1 {
+  position: relative;
+  font-size: var(--font-size-sm);
+  line-height: 140%;
+  display: inline-block;
+  color: var(--gray-gray-700);
+  min-width: 73.5px;
+}
+.breadcrumbItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-7xs-5);
+}
+.ioniconppersondefault {
+  height: 12px;
+  width: 12px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.nomeCognome {
+  margin-top: -3px;
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 93px;
+}
+.listitemdefault {
+  height: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) 0;
+  box-sizing: border-box;
+  gap: var(--gap-9xs);
+}
+.breadcrumb,
+.listitemdefault,
+.userProfile {
+  display: flex;
+  align-items: flex-start;
+}
+.userProfile {
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--padding-sm-5) 0 0;
+  color: var(--gray-gray-500);
+}
+.breadcrumb {
+  align-self: stretch;
+  overflow: hidden;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.breadcrumbParent,
+.dashboardScreen {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-31xl);
+}
+.breadcrumbParent {
+  width: 1467.8px;
+  flex-direction: column;
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--font-size-xs);
+  color: var(--gray-gray-400);
+  font-family: var(--font-helvetica);
+}
+.dashboardScreen {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-whitesmoke);
+  flex-direction: row;
+  padding: var(--padding-13xl) var(--padding-xl);
+  box-sizing: border-box;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1700px) {
+  .dashboardScreen {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 900px) {
+  .breadcrumbParent,
+  .dashboardScreen {
+    gap: var(--gap-6xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .breadcrumb {
+    flex-wrap: wrap;
+  }
+}
