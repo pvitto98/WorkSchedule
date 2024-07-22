@@ -51,7 +51,7 @@
   padding: 0 var(--padding-9xs);
 }
 .inserisciIlTuo {
-  width: 124px;
+  /* width: 124px; */
   border: 0;
   outline: 0;
   font-family: var(--font-helvetica);
@@ -132,7 +132,7 @@
   padding: 0 var(--padding-9xs);
 }
 .inserisciLaTua {
-  width: 127px;
+  /* width: 127px; */
   border: 0;
   outline: 0;
   font-family: var(--font-helvetica);
@@ -213,7 +213,7 @@
   padding: 0 var(--padding-9xs);
 }
 .inserisciLaTua1 {
-  width: 154px;
+  /* width: 154px; */
   border: 0;
   outline: 0;
   font-family: var(--font-helvetica);
@@ -315,7 +315,7 @@
   align-items: flex-start;
 }
 .rememberMe1 {
-  width: 125.5px;
+  /* width: 125.5px; */
   justify-content: flex-start;
   gap: 10.1px;
 }
@@ -449,7 +449,7 @@
 }
 .registrati {
   margin: 0;
-  width: 350px;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   gap: var(--gap-9xl);
@@ -509,13 +509,16 @@
 }
 @media screen and (max-width: 450px) {
   .immagineloginIcon {
-    height: 200px;
+    height: 100px;
   }
   .registrati1 {
     font-size: var(--font-size-lgi);
   }
   .credentials {
-    padding-top: 114px;
+    padding-top: 30px;
     box-sizing: border-box;
+  }
+  .registrazione{
+    padding-bottom: 20px;
   }
 }

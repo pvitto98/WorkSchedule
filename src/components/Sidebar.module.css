@@ -1,9 +1,11 @@
+/* Logo Styles */
 .image2Icon {
   width: 22.5px;
   height: 22px;
   position: relative;
   object-fit: cover;
 }
+
 .imageHolder {
   display: flex;
   flex-direction: column;
@@ -11,27 +13,33 @@
   justify-content: flex-end;
   padding: 0 0 var(--padding-12xs);
 }
+
 .tabellaLavoro {
   position: relative;
   line-height: 150%;
   display: inline-block;
   min-width: 127px;
 }
+
 .logo,
 .logoWrapper {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
+
 .logo {
   overflow: hidden;
   align-items: flex-end;
   gap: var(--gap-xs-6);
 }
+
 .logoWrapper {
   align-items: flex-start;
   padding: 0 var(--padding-17xl);
 }
+
+/* Sidebar Divider */
 .sidebarChild {
   align-self: stretch;
   height: 1px;
@@ -40,29 +48,117 @@
   overflow: hidden;
   flex-shrink: 0;
 }
+
+/* Menu Item Icons */
 .image4Icon {
   height: 30px;
   width: 30.5px;
   position: relative;
   object-fit: contain;
 }
-.dashboard1 {
+
+.ioniconrrocketsharp {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  margin: 0 !important;
+  top: calc(50% - 7.5px);
+  left: 7.5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+/* Menu Item Labels */
+.dashboard1,
+.logOut,
+.addData {
   position: relative;
   line-height: 150%;
   display: inline-block;
-  min-width: 63px;
 }
-.dashboardLabel {
+
+/* Menu Item Layout */
+.dashboardLabel,
+.iconWrapper,
+.label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   padding: var(--padding-7xs) 0 0;
 }
+
+.menuItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-xs) var(--padding-3xs);
+  gap: var(--gap-mini);
+  color: var(--gray-gray-400);
+  text-decoration: none;
+}
+
+.active {
+  background-color: var(--blackampwhite-white);
+  box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.25);
+  color: var(--black);
+  border-radius: 15px;
+}
+
+/* Menu Container */
+.menu {
+  width: 220px;
+  flex-direction: column;
+  padding: 0 var(--padding-3xs) 0 0;
+  box-sizing: border-box;
+  gap: var(--gap-6xl);
+}
+
+.menuWrapper,
+.sidebar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.menuWrapper {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 0 var(--padding-6xs) 0 var(--padding-7xs);
+  font-size: var(--font-size-xs);
+}
+
+/* Sidebar Layout */
+.sidebar {
+  position: fixed;
+  width: 250px;
+  flex-direction: column;
+  gap: var(--gap-5xl-5);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--gray-gray-700);
+  font-family: var(--font-helvetica);
+  height: 100%;
+  margin-top: 28px;
+  margin-left: 20px;
+  background-color: var(--color-whitesmoke);
+  transition: transform 0.3s ease, top 0.3s ease;
+  overflow: hidden;
+}
+
+.open {
+  transform: translateX(0);
+}
+
+/* Dashboard and Log Out Button Background */
 .dashboard,
 .signUpIconBackground {
   background-color: var(--blackampwhite-white);
 }
+
+/* Dashboard Button */
 .dashboard {
   align-self: stretch;
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.25);
@@ -75,6 +171,8 @@
   padding: var(--padding-xs) var(--padding-3xs);
   gap: var(--gap-mini);
 }
+
+/* Log Out Button */
 .signUpIconBackground {
   height: 30px;
   width: 30px;
@@ -82,33 +180,19 @@
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.02);
   border-radius: var(--br-xs);
 }
-.ioniconrrocketsharp {
-  height: 15px;
-  width: 15px;
-  position: absolute;
-  margin: 0 !important;
-  top: calc(50% - 7.5px);
-  left: 7.5px;
-  overflow: hidden;
-  flex-shrink: 0;
-  z-index: 1;
-}
-.logOut {
-  position: relative;
-  line-height: 150%;
-  display: inline-block;
-  min-width: 45.5px;
-}
+
 .signOutLabel,
 .signUp {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 }
+
 .signOutLabel {
   flex-direction: column;
   padding: var(--padding-7xs) 0 0;
 }
+
 .signUp {
   overflow: hidden;
   flex-direction: row;
@@ -116,32 +200,33 @@
   gap: var(--gap-xs);
   color: var(--gray-gray-400);
 }
-.menu {
-  width: 220px;
-  flex-direction: column;
-  padding: 0 var(--padding-3xs) 0 0;
-  box-sizing: border-box;
-  gap: var(--gap-6xl);
-}
-.menu,
-.menuWrapper,
-.sidebar {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.menuWrapper {
-  align-self: stretch;
-  flex-direction: row;
-  padding: 0 var(--padding-6xs) 0 var(--padding-7xs);
-  font-size: var(--font-size-xs);
-}
-.sidebar {
-  width: 233.3px;
-  flex-direction: column;
-  gap: var(--gap-5xl-5);
-  text-align: left;
-  font-size: var(--font-size-sm);
-  color: var(--gray-gray-700);
-  font-family: var(--font-helvetica);
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    flex-direction: column;
+    transform: translateY(-100%);
+    z-index: 999999;
+    align-items: center;
+
+  }
+  .menu{
+    width: 80%;
+  }
+
+  .open {
+    transform: translateY(0);
+  }
+
+  .menuWrapper{
+    align-items: center;
+    justify-content: center;
+
+  }
 }

@@ -1,0 +1,12 @@
+.breadcrumb {
+    /* position: fixed; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--padding-sm-5) var(--padding-xl); /* Adjust as needed */
+    background-color: var(--color-whitesmoke);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Optional: Add shadow for visual separation */
+    z-index: 1000; /* Ensure it's on top */
+  }
+  

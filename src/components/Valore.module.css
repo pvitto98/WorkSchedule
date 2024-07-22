@@ -18,11 +18,10 @@
   font-family: var(--font-helvetica);
   font-weight: 700;
   font-size: var(--font-size-lg);
-  color: var(--gray-gray-700);
+  color: black;
   min-width: 47px;
 }
 .valorecontent {
-  width: 78px;
   overflow: hidden;
   flex-shrink: 0;
   display: flex;
@@ -38,7 +37,9 @@
   object-fit: contain;
 }
 .valore {
-  width: 350px;
+  min-width: 250px; /* Ensure it doesn't shrink below 250px */
+  width: auto; /* Allow it to grow */
+  max-width: 100%; /* Ensure it doesn't grow beyond the container width */
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.25);
   border-radius: var(--br-mini);
   background-color: var(--blackampwhite-white);
@@ -54,11 +55,12 @@
   gap: var(--gap-xl);
   text-align: left;
   font-size: var(--font-size-xs);
-  color: var(--gray-gray-400);
+  color: black;
   font-family: var(--font-helvetica);
 }
 @media screen and (max-width: 450px) {
   .valore {
     flex-wrap: wrap;
+    width: 100%;
   }
 }

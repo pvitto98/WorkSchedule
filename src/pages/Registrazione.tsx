@@ -1,7 +1,39 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useContext } from "react";
 import styles from "./Registrazione.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../UserContext"; // Assume UserContext is set up in a higher-level component
+import { BASE_URL } from '../config';
 
 const Registrazione: FunctionComponent = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/auth/register`, {
+        name,
+        email,
+        password,
+      });
+      const { token, userId } = response.data;
+
+      console.log("Registration successful:", response.data);
+      setUser({
+        name, email,
+        userId: userId
+      }); 
+      // Update the user context
+      navigate("/"); // Optionally, redirect to the login page or home page
+    } catch (error) {
+      console.error("Registration failed:", error);
+      // Handle registration failure (show error message, etc.)
+    }
+  };
+
   return (
     <div className={styles.registrazione}>
       <section className={styles.logincontent}>
@@ -13,7 +45,7 @@ const Registrazione: FunctionComponent = () => {
         />
         <div className={styles.credentials}>
           <div className={styles.inputcontainer}>
-            <form className={styles.registrati}>
+            <div className={styles.registrati}>
               <div className={styles.registrationOptions}>
                 <div className={styles.registerWith}>
                   <div className={styles.title}>
@@ -31,6 +63,8 @@ const Registrazione: FunctionComponent = () => {
                       className={styles.inserisciIlTuo}
                       placeholder="Inserisci il tuo nome"
                       type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                     <img
                       className={styles.passwordTextIcon}
@@ -53,6 +87,8 @@ const Registrazione: FunctionComponent = () => {
                       className={styles.inserisciLaTua}
                       placeholder="Inserisci la tua email"
                       type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     <img
                       className={styles.passwordTextIcon1}
@@ -74,7 +110,9 @@ const Registrazione: FunctionComponent = () => {
                     <input
                       className={styles.inserisciLaTua1}
                       placeholder="Inserisci la tua password"
-                      type="text"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <img
                       className={styles.passwordTextIcon2}
@@ -87,22 +125,14 @@ const Registrazione: FunctionComponent = () => {
                   </div>
                 </div>
               </div>
-              <div className={styles.rememberMe}>
-                <div className={styles.rememberMe1}>
-                  <div className={styles.switchbase}>
-                    <div className={styles.toggleCircle} />
-                  </div>
-                  <div className={styles.ricordami}>Ricordami</div>
-                </div>
-              </div>
-              <button className={styles.buttonbase}>
+              <button className={styles.buttonbase} onClick={handleRegister}>
                 <div className={styles.widthStructure}>
                   <div className={styles.heightStructure}>
                     <div className={styles.buttonBody}>
                       <div className={styles.icon}>
                         <div className={styles.div}></div>
                       </div>
-                      <b className={styles.text}>Accedi</b>
+                      <b className={styles.text}>Registrati</b>
                       <div className={styles.icon1}>
                         <div className={styles.div1}></div>
                       </div>
@@ -119,10 +149,10 @@ const Registrazione: FunctionComponent = () => {
                   <b className={styles.b}>{` `}</b>
                 </span>
                 <b className={styles.accedi}>
-                  <span className={styles.accedi1}>Accedi</span>
+                  <Link to="/login"><span className={styles.accedi1}>Accedi</span></Link>
                 </b>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </section>

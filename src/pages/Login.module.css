@@ -11,6 +11,7 @@
 }
 .immagineloginIcon {
   width: 960px;
+  height: 100svh;
   position: relative;
   max-height: 100%;
   object-fit: cover;
@@ -29,13 +30,10 @@
   line-height: normal;
   letter-spacing: normal;
   gap: var(--gap-xl);
+  /* height: 100vh; */
+
 }
-@media screen and (max-width: 1700px) {
-  .emailPasswordFieldsWrapper,
-  .immagineloginIcon {
-    flex: 1;
-  }
-}
+
 @media screen and (max-width: 1625px) {
   .emailPasswordFieldsWrapper,
   .immagineloginIcon {
@@ -64,4 +62,19 @@
     box-sizing: border-box;
     min-width: 100%;
   }
+}
+
+@media screen and (max-width: 420px) {
+  .immagineloginIcon{
+    height: 150px;
+  }
+
+  .emailPasswordFieldsWrapper{
+    padding: 100px 0 0;
+  }
+  .login{
+    padding: 0 ;
+    padding-bottom: 0px;
+  }
+  
 }

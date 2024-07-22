@@ -1,0 +1,33 @@
+.monthlyDataScreen {
+    padding: 20px;
+  }
+  
+  .selector {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .selector label {
+    margin-right: 10px;
+  }
+  
+  .selector select {
+    padding: 5px;
+  }
+  
+  .dataTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .dataTable th, .dataTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .dataTable th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  

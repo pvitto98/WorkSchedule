@@ -24,6 +24,7 @@
   max-width: 100%;
   text-align: left;
   font-family: var(--font-helvetica);
+  flex-wrap: wrap;
 }
 .monthData {
   margin: 0;
@@ -31,11 +32,13 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: var(--padding-3xs) 0;
+  padding: var(--padding-3xs);
   box-sizing: border-box;
   gap: var(--gap-xl);
   font-size: var(--font-size-xs);
   color: var(--gray-gray-400);
+  row-gap: var(--gap-xl);
+
 }
 .analyticsCards {
   overflow: hidden;
@@ -59,5 +62,10 @@
   }
   .monthSelector {
     flex-wrap: wrap;
+  }
+
+  .monthData {
+    justify-content: center;
+  
   }
 }

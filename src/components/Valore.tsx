@@ -5,7 +5,7 @@ export type ValoreType = {
   className?: string;
   ferie?: string;
   immagine?: string;
-
+  value?: String;
   /** Style props */
   propGap?: CSSProperties["gap"];
 };
@@ -15,6 +15,7 @@ const Valore: FunctionComponent<ValoreType> = ({
   ferie,
   immagine,
   propGap,
+  value
 }) => {
   const valore1Style: CSSProperties = useMemo(() => {
     return {
@@ -26,7 +27,7 @@ const Valore: FunctionComponent<ValoreType> = ({
     <div className={[styles.valore, className].join(" ")} style={valore1Style}>
       <div className={styles.valorecontent}>
         <b className={styles.ferie}>{ferie}</b>
-        <input className={styles.value} placeholder="2,300" type="text" />
+        <b className={styles.value}>{value}</b>
       </div>
       <img className={styles.immagineIcon} alt="" src={immagine} />
     </div>

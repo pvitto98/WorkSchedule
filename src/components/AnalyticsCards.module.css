@@ -31,11 +31,13 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: var(--padding-3xs) 0;
+  padding: var(--padding-3xs);
   box-sizing: border-box;
   max-width: 100%;
   font-size: var(--font-size-xs);
   color: var(--gray-gray-400);
+  row-gap: var(--gap-xl);
+
 }
 .yearSummary {
   flex-direction: column;
@@ -88,5 +90,7 @@
   .yearDataContainer {
     max-width: 100%;
     row-gap: 10px;
+    justify-content: center;
+
   }
 }

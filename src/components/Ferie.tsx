@@ -3,15 +3,13 @@ import styles from "./Straordinari.module.css";
 import LineChart from "./LineChart";
 import { ApexOptions } from "apexcharts";
 
-export type StraordinariType = {
+export type FerieType = {
   className?: string;
-  straordinari?: string;
-  image1?: string;
+  ferie?: string;
   // Style props
   propPadding?: CSSProperties["padding"];
   // New props
-  ferialiData: number[];
-  festiviData: number[];
+  ferieData: number[];
 };
 
 const lineChartOptions: ApexOptions = {
@@ -26,51 +24,54 @@ const lineChartOptions: ApexOptions = {
     enabled: false
   },
   stroke: {
-    curve: 'smooth', // Changed from 'smooth' to 'straight'
+    curve: 'straight', // Changed from 'smooth' to 'straight'
+    width: 2, // Adjusted stroke width
+    dashArray: 5, // Creates a dashed line effect
   },
   title: {
-    text: 'Straordinari Trends',
+    text: 'Ferie Trends',
     align: 'left'
   },
   grid: {
     row: {
-      colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+      colors: ['#f7f7f7', 'transparent'], // takes an array which will be repeated on columns
       opacity: 0.5
     },
+  },
+  markers: {
+    size: 5, // Added marker size
+    colors: ['#FF4560'], // Marker color
+    strokeColors: '#fff', // Marker stroke color
+    strokeWidth: 2, // Marker stroke width
   },
   xaxis: {
     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   }
 };
 
-const Straordinari: FunctionComponent<StraordinariType> = ({
+const Ferie: FunctionComponent<FerieType> = ({
   className = "",
-  straordinari,
+  ferie,
   propPadding,
-  ferialiData,
-  festiviData
+  ferieData
 }) => {
-  const straordinariStyle: CSSProperties = useMemo(() => ({
+  const ferieStyle: CSSProperties = useMemo(() => ({
     padding: propPadding,
   }), [propPadding]);
 
   const chartSeries = [
     {
-      name: "Feriali",
-      data: ferialiData
-    },
-    {
-      name: "Festivi",
-      data: festiviData
+      name: "Ferie",
+      data: ferieData
     }
   ];
 
   return (
     <div
       className={[styles.straordinari, className].join(" ")}
-      style={straordinariStyle}
+      style={ferieStyle}
     >
-      <b className={styles.straordinari1}>{straordinari}</b>
+      <b className={styles.straordinari1}>{ferie}</b>
       <div className={styles.graficostraordinari}>
         <LineChart series={chartSeries} options={lineChartOptions} />
       </div>
@@ -78,4 +79,4 @@ const Straordinari: FunctionComponent<StraordinariType> = ({
   );
 };
 
-export default Straordinari;
+export default Ferie;

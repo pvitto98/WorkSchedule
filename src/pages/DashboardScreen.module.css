@@ -87,33 +87,31 @@
   gap: var(--gap-31xl);
 }
 .breadcrumbParent {
-  width: 1467.8px;
+  width: 100%;
   flex-direction: column;
   max-width: 100%;
   text-align: left;
   font-size: var(--font-size-xs);
   color: var(--gray-gray-400);
   font-family: var(--font-helvetica);
+  margin-left: 250px;
+
 }
 .dashboardScreen {
   width: 100%;
   position: relative;
-  background-color: var(--color-whitesmoke);
-  flex-direction: row;
+  flex-direction: column;
   padding: var(--padding-13xl) var(--padding-xl);
   box-sizing: border-box;
   line-height: normal;
   letter-spacing: normal;
 }
-@media screen and (max-width: 1700px) {
-  .dashboardScreen {
-    flex-wrap: wrap;
-  }
-}
+
 @media screen and (max-width: 900px) {
   .breadcrumbParent,
   .dashboardScreen {
     gap: var(--gap-6xl);
+    flex-wrap: wrap;
   }
 }
 @media screen and (max-width: 450px) {

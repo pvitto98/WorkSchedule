@@ -1,0 +1,40 @@
+.layout {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  background-color: var(--color-whitesmoke);
+}
+
+.content {
+  width: 100%;
+  margin-left: 250px; /* Adjust according to your sidebar width */
+  padding-top: 60px; /* Adjust this to the height of the breadcrumb */
+  overflow-y: auto; /* Enable vertical scrolling */
+  position: relative;
+  box-sizing: border-box;
+  padding-right: 25px;
+}
+
+.breadcrumb {
+  position: fixed;
+  top: 0;
+  left: 250px; /* Adjust according to your sidebar width */
+  width: calc(100% - 250px); /* Adjust according to your sidebar width */
+  z-index: 1000;
+  background-color: var(--color-whitesmoke); /* Match the background */
+  padding: var(--padding-sm-5) 0 0; /* Adjust padding as needed */
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+    padding-top: 120px; /* Adjust this to the height of the breadcrumb */
+    padding-right: 0px;
+
+  }
+
+  .breadcrumb {
+    left: 0;
+    top:50px;
+    width: 100%;
+  }
+}

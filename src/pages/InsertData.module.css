@@ -880,7 +880,6 @@
   max-width: 100%;
 }
 .name1 {
-  width: 350px;
   border-radius: var(--br-mini);
   background-color: var(--blackampwhite-white);
   border: 1px solid var(--gray-gray-200);
@@ -951,7 +950,7 @@
   align-items: flex-start;
 }
 .inputfieldtext1 {
-  width: 311px;
+  /* width: 311px; */
   overflow: hidden;
   flex-shrink: 0;
   flex-direction: column;
@@ -962,7 +961,7 @@
   flex-direction: row;
 }
 .name3 {
-  width: 100px;
+  /* width: 100px; */
   border-radius: var(--br-mini);
   background-color: var(--blackampwhite-white);
   border: 1px solid var(--gray-gray-200);
@@ -985,7 +984,7 @@
   color: var(--gray-gray-700);
   text-align: left;
   display: inline-block;
-  min-width: 81px;
+  /* min-width: 81px; */
 }
 .oraIngressoContainer {
   display: flex;
@@ -1032,7 +1031,7 @@
   align-items: flex-start;
 }
 .inputfieldtext2 {
-  width: 311px;
+  /* width: 311px; */
   overflow: hidden;
   flex-shrink: 0;
   flex-direction: column;
@@ -1128,7 +1127,7 @@
   max-width: 100%;
 }
 .name7 {
-  flex: 1;
+  /* flex: 1; */
   border-radius: var(--br-mini);
   background-color: var(--blackampwhite-white);
   border: 1px solid var(--gray-gray-200);
@@ -1136,7 +1135,7 @@
   overflow: hidden;
   padding: var(--padding-smi) var(--padding-lg) var(--padding-smi)
     var(--padding-lgi);
-  min-width: 227px;
+  /* min-width: 227px; */
 }
 .name6 {
   align-self: stretch;
