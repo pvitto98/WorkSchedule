@@ -20,10 +20,18 @@ const InsertData: FunctionComponent = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    var clearedStartTime = startTime;
+    var clearedEndTime = endTime;
+
+    if(specialDay){
+      clearedStartTime = "00:00";
+      clearedEndTime = "00:00";  
+    }
   
     // Convert startTime and endTime from string to Date objects
-    const startTimeDate = new Date(`${date}T${startTime}`);
-    let endTimeDate = new Date(`${date}T${endTime}`);
+    const startTimeDate = new Date(`${date}T${clearedStartTime}`);
+    let endTimeDate = new Date(`${date}T${clearedEndTime}`);
   
     // If endTime is earlier than startTime, assume endTime is on the next day
     if (endTimeDate < startTimeDate) {

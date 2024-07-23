@@ -9,4 +9,9 @@
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Optional: Add shadow for visual separation */
     z-index: 1000; /* Ensure it's on top */
   }
+  .userProfile{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+  }
   

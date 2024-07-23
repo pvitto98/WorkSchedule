@@ -6,5 +6,6 @@ export default defineConfig({
   build: {
     outDir: "build",
   },
+  base: './', // ensure correct base path for relative links
   plugins: [react()],
 });

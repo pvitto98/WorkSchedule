@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import InsertData from "./pages/InsertData";
 import Registrazione from "./pages/Registrazione";
 import MonthlyDataScreen from "./components/MonthlyDataScreen";
+import FileUploader from "./components/FileUploader";
 
 function App() {
   const action = useNavigationType();
@@ -65,6 +66,7 @@ function App() {
         <Route index element={<DashboardScreen />} />
         <Route path="insertdata" element={<InsertData />} />
         <Route path="monthlydatascreen" element={<MonthlyDataScreen />} />
+        <Route path="restoredata" element={<FileUploader />} />
       </Route>
       <Route path="/registrazione" element={<Registrazione />} />
       <Route path="/login" element={<Login />} />

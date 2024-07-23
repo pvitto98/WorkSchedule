@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 
@@ -12,6 +12,30 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  // Set the initial state based on the screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) { // Assuming 1024px is the breakpoint for desktop
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    };
+
+    // Set the initial state
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
 
   return (
     <div className={`${styles.sidebar} ${className} ${isOpen ? styles.open : ""}`}>
@@ -91,6 +115,24 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                 </div>
               </NavLink>
               <NavLink
+                to="/restoredata"
+                className={({ isActive }) =>
+                  isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
+                }
+              >
+                <div className={styles.iconWrapper}>
+                  <img
+                    className={styles.icon}
+                    loading="lazy"
+                    alt=""
+                    src="/ioniconrrocketsharp.svg"
+                  />
+                </div>
+                <div className={styles.label}>
+                  <b className={styles.logOut}>Restore Data</b>
+                </div>
+              </NavLink>
+              <NavLink
                 to="/login"
                 className={({ isActive }) =>
                   isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
@@ -108,6 +150,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                   <b className={styles.logOut}>Log out</b>
                 </div>
               </NavLink>
+
             </div>
           </div>
         </>

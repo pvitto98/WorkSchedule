@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from "../UserContext";
 import { BASE_URL } from '../config';
+import Spinner from "./Spinner";
 
 export type EmailPasswordFieldsType = {
   className?: string;
@@ -16,21 +17,21 @@ const EmailPasswordFields: FunctionComponent<EmailPasswordFieldsType> = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("TRYING LOGIN WITH", BASE_URL, email);
+    setLoading(true); // Set loading to true when the request starts
     try {
       const response = await axios.post(`${BASE_URL}/auth/login`, {
         email,
         password,
       }, { withCredentials: true });
-
       const { token, userId, name } = response.data;
-      console.log(response.data);
-      // Save the token in localStorage
       localStorage.setItem("token", token);
 
       // Set user context with name, email, and userId
@@ -39,14 +40,21 @@ const EmailPasswordFields: FunctionComponent<EmailPasswordFieldsType> = ({
       // Redirect to the desired page after login
       navigate("/");
     } catch (error) {
-      console.error("Login failed", error);
-      alert("Login failed. Please check your credentials.");
+      if (error instanceof Error) {
+        setFeedbackMessage('An error occurred: ' + error.message);
+      } else {
+        setFeedbackMessage('An unknown error occurred');
+      }
+    } finally {
+      setLoading(false); // Set loading to false when the request finishes
     }
   };
 
   return (
     <div className={[styles.emailPasswordFields, className].join(" ")}>
-      <form onSubmit={handleLogin}>
+            {loading && <Spinner />} {/* Conditionally render the spinner */}
+
+      <form onSubmit={handleLogin} className={styles.form}>
         <div className={styles.benRitornatoParent}>
           <h1 className={styles.benRitornato}>Ben Ritornato</h1>
           <div className={styles.inserisciLaMailELaPassworWrapper}>
@@ -67,11 +75,6 @@ const EmailPasswordFields: FunctionComponent<EmailPasswordFieldsType> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <img
-              className={styles.passwordTextIcon}
-              alt=""
-              src="/password-text.svg"
-            />
             <div className={styles.minwidth}>
               <div className={styles.content} />
             </div>
@@ -89,22 +92,17 @@ const EmailPasswordFields: FunctionComponent<EmailPasswordFieldsType> = ({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <img
-              className={styles.passwordTextIcon1}
-              alt=""
-              src="/password-text1.svg"
-            />
             <div className={styles.minwidth1}>
               <div className={styles.content1} />
             </div>
           </div>
         </div>
-        <div className={styles.switchbaseParent}>
+        {/* <div className={styles.switchbaseParent}>
           <div className={styles.switchbase}>
             <div className={styles.switchbaseChild} />
           </div>
           <div className={styles.ricordami}>Ricordami</div>
-        </div>
+        </div> */}
         <button type="submit" className={styles.accedi}>
           <div className={styles.widthStructure}>
             <div className={styles.heightStructure}>
@@ -124,6 +122,8 @@ const EmailPasswordFields: FunctionComponent<EmailPasswordFieldsType> = ({
           </b>
         </div>
       </form>
+            {/* Feedback message */}
+            {feedbackMessage && <div>{feedbackMessage}</div>}
     </div>
   );
 };

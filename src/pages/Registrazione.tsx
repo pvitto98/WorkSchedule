@@ -4,15 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext"; // Assume UserContext is set up in a higher-level component
 import { BASE_URL } from '../config';
+import Spinner from "../components/Spinner";
 
 const Registrazione: FunctionComponent = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
   const handleRegister = async () => {
+    setLoading(true); // Set loading to true when the request starts
     try {
       const response = await axios.post(`${BASE_URL}/auth/register`, {
         name,
@@ -31,11 +34,15 @@ const Registrazione: FunctionComponent = () => {
     } catch (error) {
       console.error("Registration failed:", error);
       // Handle registration failure (show error message, etc.)
+    } finally {
+      setLoading(false); // Set loading to false when the request finishes
     }
   };
 
   return (
     <div className={styles.registrazione}>
+          {loading && <Spinner />} {/* Conditionally render the spinner */}
+
       <section className={styles.logincontent}>
         <img
           className={styles.immagineloginIcon}
