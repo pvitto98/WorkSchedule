@@ -16,7 +16,7 @@ const InsertData: FunctionComponent = () => {
     setSpecialDay(event.target.value);
   };
 
-  const isSpecialDaySelected = specialDay === "Ferie" || specialDay === "Malattia";
+  const isSpecialDaySelected = specialDay === "Ferie" || specialDay === "Malattia" || specialDay === "Permesso";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,6 +41,7 @@ const InsertData: FunctionComponent = () => {
     try {
       // Send POST request to backend API
       console.log("about to send data from " + user.userId);
+      console.log(specialDay);
       await axios.post(`${BASE_URL}/api/dailydata`, {
         userId: user.userId, // Assuming userId is already defined
         date,
@@ -139,6 +140,7 @@ const InsertData: FunctionComponent = () => {
                     <option value="">None</option>
                     <option value="Ferie">Ferie</option>
                     <option value="Malattia">Malattia</option>
+                    <option value="Permesso">Permesso</option>
                   </select>
                 </div>
               </div>

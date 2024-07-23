@@ -22,6 +22,32 @@ const MonthlyDataScreen: FunctionComponent = () => {
     const [selectedMonth, setSelectedMonth] = useState(currentMonthIndex);
     const [selectedYear, setSelectedYear] = useState(currentYear);
     const [dailyData, setDailyData] = useState([] as any[]);
+    const [availableYears, setAvailableYears] = useState<string[]>([new Date().getFullYear().toString()]);
+
+    // Fetch available years for the user
+    const fetchAvailableYears = async () => {
+        try {
+            const userId = user.userId;
+            const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`); // Correct endpoint
+            if (response.status === 200) {
+                const years = response.data.years.sort((a: number, b: number) => b - a)
+                setAvailableYears(years);
+                // Set the selected year to the most recent year by default
+                setSelectedYear(years[0]);
+            }
+        } catch (error) {
+            console.error("Failed to fetch available years", error);
+        }
+    };
+
+
+    // Fetch available years on mount
+    useEffect(() => {
+        if (user.userId) {
+            fetchAvailableYears();
+        }
+    }, [user.userId]);
+
 
     const fetchDailyData = async (month: number, year: number) => {
         try {
@@ -67,8 +93,10 @@ const MonthlyDataScreen: FunctionComponent = () => {
                 <div>
                     <label>Anno:</label>
                     <select value={selectedYear} onChange={handleYearChange}>
-                        {[currentYear - 1, currentYear, currentYear + 1].map(year => (
-                            <option key={year} value={year}>{year}</option>
+                        {availableYears.map((year) => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
                         ))}
                     </select>
                 </div>

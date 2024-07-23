@@ -114,7 +114,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                   <b className={styles.addData}>Tabella Dati</b>
                 </div>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to="/restoredata"
                 className={({ isActive }) =>
                   isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
@@ -131,7 +131,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                 <div className={styles.label}>
                   <b className={styles.logOut}>Restore Data</b>
                 </div>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 to="/login"
                 className={({ isActive }) =>

@@ -9,7 +9,7 @@ const Layout: FunctionComponent = () => {
   const { user } = useContext(UserContext); // Assuming UserContext provides an object with a 'user' property
   const navigate = useNavigate();
 
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     if (user.userId==="") {
       // Redirect to /login if not logged in

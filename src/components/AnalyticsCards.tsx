@@ -38,9 +38,10 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
       const userId = user.userId;
       const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`); // Correct endpoint
       if (response.status === 200) {
-        setAvailableYears(response.data.years);
+        const years = response.data.years.sort((a: number, b: number) => b - a)
+        setAvailableYears(years);
         // Set the selected year to the most recent year by default
-        setSelectedYear(response.data.years[0]);
+        setSelectedYear(years[0]);
       }
     } catch (error) {
       console.error("Failed to fetch available years", error);
@@ -94,7 +95,7 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
   const formatTime = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
+    return `${hours}h ${Math.floor(mins)}m`;
   };
 
   return (

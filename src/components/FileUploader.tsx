@@ -19,6 +19,7 @@ const FileUploader: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { user } = useContext(UserContext);
+  var batchNumber = 0;
 
   const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const userId = user.userId;
@@ -35,22 +36,23 @@ const FileUploader: React.FC = () => {
 
     try {
       const csvText = await file.text();
+      const dataToSend: any[] = [];
 
       Papa.parse<RowData>(csvText, {
         header: true,
         skipEmptyLines: true,
         complete: async (parsedData) => {
-          for (const row of parsedData.data) {
+          parsedData.data.forEach(row => {
             try {
               const note = (row['NOTE'] || '').replace(/\r?\n|\r/g, ' ').trim();
-              const isFerie = row['FERIE'] === '1';
-              const isMalattia = row['MALATTIA'] === '1';
+              const isFerie = row['ORARIO ENTRATA'].toUpperCase().trim() === 'FERIE';
+              const isMalattia = row['ORARIO ENTRATA'].toUpperCase().trim().includes('MALATTIA');
               const specialDay = isFerie ? 'Ferie' : isMalattia ? 'Malattia' : '';
 
               const date = parseDate(row['DATA']);
               if (!date) {
                 console.error(`Invalid date: ${row['DATA']}. Skipping row.`);
-                continue;
+                return;
               }
 
               let startTimeDate: string | null = null, endTimeDate: string | null = null;
@@ -68,7 +70,8 @@ const FileUploader: React.FC = () => {
                     second: parseInt(startTime.split(':')[2] || '00')
                   }).toISO();
                 } else {
-                  throw new Error(`Invalid start time: ${row['ORARIO ENTRATA']}`);
+                  console.error(`Invalid start time: ${row['ORARIO ENTRATA']}`);
+                  return;
                 }
 
                 if (endTime) {
@@ -78,7 +81,8 @@ const FileUploader: React.FC = () => {
                     second: parseInt(endTime.split(':')[2] || '00')
                   }).toISO();
                 } else {
-                  throw new Error(`Invalid end time: ${row['ORARIO USCITA']}`);
+                  console.error(`Invalid end time: ${row['ORARIO USCITA']}`);
+                  return;
                 }
               }
 
@@ -86,23 +90,32 @@ const FileUploader: React.FC = () => {
                 endTimeDate = DateTime.fromISO(endTimeDate).plus({ days: 1 }).toISO();
               }
 
-              const data = {
+              dataToSend.push({
                 userId,
                 date: date.toISODate(),
                 ingress: startTimeDate,
                 outgress: endTimeDate,
                 specialDay,
-                note,
-                straordinarioFeriale: 0,
-                straordinarioFestivo: 0,
-                ferie: isFerie,
-                permesso: 0
-              };
-
-              await axios.post(`${BASE_URL}/api/dailydata`, data);
-              console.log(`Successfully sent data: ${JSON.stringify(data)}`);
+                note
+              });
             } catch (error) {
               console.error(`Failed to process row: ${JSON.stringify(row)}\n`, error);
+            }
+          });
+
+          // Send data in batches of 100
+          if (dataToSend.length > 0) {
+            try {
+              for (let i = 0; i < dataToSend.length; i += 100) {
+                const batch = dataToSend.slice(i, i + 100);
+                // console.log('bout to send batch number ', batchNumber);
+                batchNumber++;
+                await axios.post(`${BASE_URL}/api/dailydata/batch`, batch);
+                // console.log(`Successfully sent batch: ${JSON.stringify(batch)}`);
+              }
+            } catch (error) {
+              console.error('Error sending data in batch:', error);
+              setError('An error occurred while sending data.');
             }
           }
         }

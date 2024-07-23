@@ -23,6 +23,13 @@ const getItalianMonthName = (monthIndex: number) => {
   return monthNames[monthIndex];
 };
 
+  // Helper function to format minutes as hours and minutes
+  const formatTime = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours}h ${Math.floor(mins)}m`;
+  };
+
 const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
   className = "",
 }) => {
@@ -36,6 +43,7 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
   const [monthlyData, setMonthlyData] = useState({
     ferie: 0,
+    malattia: 0,
     straordinariFeriali: 0,
     straordinariFestivi: 0,
   });
@@ -51,12 +59,12 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
       const response = await axios.get(`${BASE_URL}/api/monthlyaggregates/${userId}/${year}/${monthIndex}`);
   
       if (response.status === 200) {
-        console.log(response.data);
         setMonthlyData(response.data);
       } else if (response.status === 404) {
         // Handle no data found
         setMonthlyData({
           ferie: -1,
+          malattia: -1,
           straordinariFeriali: -1,
           straordinariFestivi: -1,
         });
@@ -66,6 +74,7 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
       // Handle server error by setting all values to "x"
       setMonthlyData({
         ferie: -1,
+        malattia: -1,
         straordinariFeriali: -1,
         straordinariFestivi: -1,
       });
@@ -78,9 +87,11 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
         const userId = user.userId;
         const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`); // Correct endpoint
         if (response.status === 200) {
-          setAvailableYears(response.data.years);
-          // Set the selected year to the most recent year by default
-          setSelectedYear(response.data.years[0]);
+          const years = response.data.years.sort((a: number, b: number) => b - a);
+          setAvailableYears(years);
+          if (years.length > 0) {
+            setSelectedYear(years[0]);
+          }
         }
       } catch (error) {
         console.error("Failed to fetch available years", error);
@@ -161,16 +172,22 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
           value={`${monthlyData.ferie}`}
         />
         <Valore
+          ferie="Malattia"
+          immagine="/immagine-1@2x.png"
+          propGap="unset"
+          value={`${monthlyData.malattia}`}
+        />
+        <Valore
           ferie="Straordinari Feriali"
           immagine="/immagine-1@2x.png"
           propGap="unset"
-          value={`${Math.floor(monthlyData.straordinariFeriali / 60)}h ${monthlyData.straordinariFeriali % 60}m`}
+          value={formatTime(monthlyData.straordinariFeriali)}
           />
         <Valore
           ferie="Straordinari Festivi"
           immagine="/immagine-2@2x.png"
           propGap="unset"
-          value={`${Math.floor(monthlyData.straordinariFestivi / 60)}h ${monthlyData.straordinariFestivi % 60}m`}
+          value={formatTime(monthlyData.straordinariFestivi)}
           />
       </nav>
     </section>
