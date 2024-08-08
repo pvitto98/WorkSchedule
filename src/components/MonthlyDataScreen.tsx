@@ -3,6 +3,7 @@ import styles from "./MonthlyDataScreen.module.css";
 import axios from "axios"; // Assuming you're using Axios for HTTP requests
 import { UserContext } from "../UserContext"; // Import your UserContext
 import { BASE_URL } from '../config';
+import { FaTrash } from 'react-icons/fa'; // Importing trash icon from react-icons
 
 const months = [
     "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
@@ -79,6 +80,15 @@ const MonthlyDataScreen: FunctionComponent = () => {
         setSelectedYear(parseInt(event.target.value, 10));
     };
 
+    const handleDelete = async (id: string) => {
+        try {
+            await axios.delete(`${BASE_URL}/api/dailydata/${id}`);
+            setDailyData(dailyData.filter(data => data._id !== id));
+        } catch (error) {
+            console.error("Failed to delete daily data", error);
+        }
+    };
+
     return (
         <div className={styles.monthlyDataScreen}>
             <div className={styles.selector}>
@@ -119,6 +129,11 @@ const MonthlyDataScreen: FunctionComponent = () => {
                             <td>{!data.specialDay && (new Date(data.outgress).toLocaleTimeString([], { hourCycle: 'h23', hour: '2-digit', minute: '2-digit' }))}</td>
                             <td>{data.specialDay}</td>
                             <td>{data.note}</td>
+                            <td>
+                                <button onClick={() => handleDelete(data._id)}>
+                                    <FaTrash />
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
