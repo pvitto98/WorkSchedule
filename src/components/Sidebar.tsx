@@ -35,8 +35,6 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
     };
   }, []);
 
-
-
   return (
     <div className={`${styles.sidebar} ${className} ${isOpen ? styles.open : ""}`}>
       <div className={styles.logoWrapper} onClick={toggleSidebar}>
@@ -67,6 +65,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                 className={({ isActive }) =>
                   isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
                 }
+                onClick={toggleSidebar} // Close sidebar when clicked
               >
                 <img
                   className={styles.image4Icon}
@@ -83,6 +82,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                 className={({ isActive }) =>
                   isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
                 }
+                onClick={toggleSidebar} // Close sidebar when clicked
               >
                 <div className={styles.iconWrapper}>
                   <img
@@ -101,6 +101,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                 className={({ isActive }) =>
                   isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
                 }
+                onClick={toggleSidebar} // Close sidebar when clicked
               >
                 <div className={styles.iconWrapper}>
                   <img
@@ -114,29 +115,12 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                   <b className={styles.addData}>Tabella Dati</b>
                 </div>
               </NavLink>
-              {/* <NavLink
-                to="/restoredata"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
-                }
-              >
-                <div className={styles.iconWrapper}>
-                  <img
-                    className={styles.icon}
-                    loading="lazy"
-                    alt=""
-                    src="/ioniconrrocketsharp.svg"
-                  />
-                </div>
-                <div className={styles.label}>
-                  <b className={styles.logOut}>Restore Data</b>
-                </div>
-              </NavLink> */}
               <NavLink
                 to="/login"
                 className={({ isActive }) =>
                   isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
                 }
+                onClick={toggleSidebar} // Close sidebar when clicked
               >
                 <div className={styles.iconWrapper}>
                   <img
@@ -150,7 +134,6 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                   <b className={styles.logOut}>Log out</b>
                 </div>
               </NavLink>
-
             </div>
           </div>
         </>

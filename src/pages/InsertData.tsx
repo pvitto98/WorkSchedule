@@ -1,73 +1,104 @@
-import { FunctionComponent, useState, useContext } from "react";
+import { FunctionComponent, useState, useContext, useEffect } from "react";
 import styles from "./InsertData.module.css";
 import axios from "axios"; // Assuming you're using Axios for HTTP requests
 import { UserContext } from "../UserContext"; // Import your UserContext
 import { BASE_URL } from '../config';
 
 const InsertData: FunctionComponent = () => {
-  const { user } = useContext(UserContext);
-  const [date, setDate] = useState<string>("");
-  const [startTime, setStartTime] = useState<string>("");
-  const [endTime, setEndTime] = useState<string>("");
-  const [specialDay, setSpecialDay] = useState<string>("");
-  const [notes, setNotes] = useState<string>("");
-
-  const handleSpecialDayChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSpecialDay(event.target.value);
-  };
-
-  const isSpecialDaySelected = specialDay === "Ferie" || specialDay === "Malattia" || specialDay === "Permesso";
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    var clearedStartTime = startTime;
-    var clearedEndTime = endTime;
-
-    if(specialDay){
-      clearedStartTime = "00:00";
-      clearedEndTime = "00:00";  
-    }
+    const { user } = useContext(UserContext);
+    const [date, setDate] = useState<string>(new Date().toISOString().split("T")[0]);
+    const [startTime, setStartTime] = useState<string>("");
+    const [endTime, setEndTime] = useState<string>("");
+    const [specialDay, setSpecialDay] = useState<string>("");
+    const [notes, setNotes] = useState<string>("");
   
-    // Convert startTime and endTime from string to Date objects
-    const startTimeDate = new Date(`${date}T${clearedStartTime}`);
-    let endTimeDate = new Date(`${date}T${clearedEndTime}`);
+    const handleSpecialDayChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setSpecialDay(event.target.value);
+    };
   
-    // If endTime is earlier than startTime, assume endTime is on the next day
-    if (endTimeDate < startTimeDate) {
-      endTimeDate.setDate(endTimeDate.getDate() + 1);
-    }
+    const isSpecialDaySelected = specialDay === "Ferie" || specialDay === "Malattia" || specialDay === "Permesso";
   
-    try {
-      // Send POST request to backend API
-      console.log("about to send data from " + user.userId);
-      console.log(specialDay);
-      await axios.post(`${BASE_URL}/api/dailydata`, {
-        userId: user.userId, // Assuming userId is already defined
-        date,
-        ingress: startTimeDate, // Send startTimeDate instead of startTime
-        outgress: endTimeDate, // Send endTimeDate instead of endTime
-        specialDay,
-        note: notes
-      });
+    useEffect(() => {
+      const fetchStartTime = async () => {
+        try {
+          const response = await axios.get(`${BASE_URL}/api/dailydata/${user.userId}/${date}`);
+          
+          if (response.data) {
+            // Handle ingress (start time)
+            if (response.data.ingress) {
+              // Convert to local time without altering it to UTC
+              const startTimeFromDb = new Date(response.data.ingress).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+              setStartTime(startTimeFromDb);
+            } else if (response.data.specialDay) {
+              // Handle special day (Ferie, Malattia, Permesso)
+              setSpecialDay(response.data.specialDay); 
+              setStartTime(''); 
+            } else {
+              setStartTime(''); // Default to empty if no ingress and no special day
+            }
+    
+            // Handle outgress (end time)
+            if (response.data.outgress) {
+              const endTimeFromDb = new Date(response.data.outgress).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+              setEndTime(endTimeFromDb);
+            } else {
+              setEndTime(''); // Default to empty if no outgress
+            }
+    
+            // Handle notes
+            if (response.data.note) {
+              setNotes(response.data.note); 
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching start time:", error);
+        }
+      };
+    
+      fetchStartTime();
+    }, [date, user.userId]);
+    
+    
   
-      // Reset form state after successful submission
-      setDate(new Date().toISOString().split("T")[0]);
-      setStartTime("");
-      setEndTime("");
-      setSpecialDay("");
-      setNotes("");
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
   
-      // Optionally: Show success message or redirect to dashboard
-      alert("Data inserted successfully!");
-    } catch (error) {
-      console.error("Error inserting data:", error);
-      alert("Failed to insert data. Please try again.");
-    }
-  };
+      let clearedStartTime = startTime;
+      let clearedEndTime = endTime;
   
+      if (isSpecialDaySelected) {
+        clearedStartTime = "00:00";
+        clearedEndTime = "00:00";
+      }
   
+      const startTimeDate = new Date(`${date}T${clearedStartTime}`);
+      let endTimeDate = endTime ? new Date(`${date}T${clearedEndTime}`) : null;
   
+      if (endTimeDate && endTimeDate < startTimeDate) {
+        endTimeDate.setDate(endTimeDate.getDate() + 1);
+      }
+  
+      try {
+        await axios.post(`${BASE_URL}/api/dailydata`, {
+          userId: user.userId,
+          date,
+          ingress: startTimeDate,
+          outgress: endTimeDate,
+          specialDay,
+          note: notes
+        });
+  
+        setDate(new Date().toISOString().split("T")[0]);
+        setStartTime("");
+        setEndTime("");
+        setSpecialDay("");
+        setNotes("");
+        alert("Data inserted successfully!");
+      } catch (error) {
+        console.error("Error inserting data:", error);
+        alert("Failed to insert data. Please try again.");
+      }
+    };
   return (
     <div className={styles.insertdata}>
       <section className={styles.insertform}>
