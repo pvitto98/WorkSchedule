@@ -30,7 +30,7 @@ const Registrazione: FunctionComponent = () => {
         userId: userId
       }); 
       // Update the user context
-      navigate("/"); // Optionally, redirect to the login page or home page
+      navigate("/festivedays"); // Redirect to the festive days page after registration
     } catch (error) {
       console.error("Registration failed:", error);
       // Handle registration failure (show error message, etc.)

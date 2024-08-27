@@ -7,6 +7,7 @@ import InsertData from "./pages/InsertData";
 import Registrazione from "./pages/Registrazione";
 import MonthlyDataScreen from "./components/MonthlyDataScreen";
 import FileUploader from "./components/FileUploader";
+import FestiveDays from "./pages/FestiveDays";
 
 function App() {
   const action = useNavigationType();
@@ -69,6 +70,7 @@ function App() {
         <Route path="restoredata" element={<FileUploader />} />
       </Route>
       <Route path="/registrazione" element={<Registrazione />} />
+      <Route path="/festivedays" element={<FestiveDays />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );

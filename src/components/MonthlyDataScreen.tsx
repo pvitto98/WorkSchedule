@@ -117,6 +117,8 @@ const MonthlyDataScreen: FunctionComponent = () => {
                         <th>Data</th>
                         <th>Ora Ingresso</th>
                         <th>Ora Uscita</th>
+                        <th>Straordinario</th>
+                        <th>Permesso</th>
                         <th>Giornata Speciale</th>
                         <th>Note</th>
                     </tr>
@@ -127,6 +129,8 @@ const MonthlyDataScreen: FunctionComponent = () => {
                             <td>{new Date(data.date).toLocaleDateString('en-GB')}</td>
                             <td>{!data.specialDay && (new Date(data.ingress).toLocaleTimeString([], { hourCycle: 'h23', hour: '2-digit', minute: '2-digit' }))}</td>
                             <td>{!data.specialDay && (new Date(data.outgress).toLocaleTimeString([], { hourCycle: 'h23', hour: '2-digit', minute: '2-digit' }))}</td>
+                            <td>{data.straordinarioFeriale + data.straordinarioFestivo}</td>
+                            <td>{data.permesso}</td>
                             <td>{data.specialDay}</td>
                             <td>{data.note}</td>
                             <td>

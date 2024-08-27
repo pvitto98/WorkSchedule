@@ -1,0 +1,77 @@
+.festiveDays {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blackampwhite-white);
+  }
+  
+  .content {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .title {
+    font-size: var(--font-size-13xl);
+    font-weight: 700;
+    font-family: var(--font-helvetica);
+    color: var(--gray-gray-700);
+    text-align: center;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .daySelection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .checkboxLabel {
+    font-size: var(--font-size-sm);
+    color: var(--gray-gray-700);
+    font-family: var(--font-helvetica);
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  .hoursInput {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .inputField {
+    border: 1px solid var(--gray-gray-200);
+    border-radius: var(--br-mini);
+    padding: var(--padding-xs);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-helvetica);
+  }
+  
+  .inputCheckbox{
+    width: 50%;
+  }
+  
+  .submitButton {
+    padding: var(--padding-smi) var(--padding-lg);
+    background-color: var(--teal-teal-300);
+    border: none;
+    border-radius: var(--br-xs);
+    font-size: var(--font-size-3xs);
+    font-family: var(--font-helvetica);
+    color: var(--blackampwhite-white);
+    cursor: pointer;
+    text-align: center;
+  }
+  @media screen and (max-width: 768px) {
+    .festiveDays{
+        padding: 20px;
+    }
+  }  
