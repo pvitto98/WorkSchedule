@@ -69,3 +69,12 @@
     width: 100%;
   }
 }
+
+@media screen and (max-width: 321px) {
+  .valore {
+    flex-wrap: wrap;
+    width: 100%;
+    min-width: 250px;
+  }
+}
+

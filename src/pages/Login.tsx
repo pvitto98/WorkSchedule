@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect } from "react";
 import EmailPasswordFields from "../components/EmailPasswordFields";
 import { motion, useAnimation } from "framer-motion";
 import styles from "./Login.module.css";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const Login: FunctionComponent = () => {
   const controls = useAnimation();
@@ -20,12 +21,15 @@ const Login: FunctionComponent = () => {
 
   return (
     <div className={styles.login}>
+
       <motion.div 
         className={styles.emailPasswordFieldsWrapper}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
+        
+      <LanguageSwitcher/>
         <EmailPasswordFields />
       </motion.div>
       <motion.div 

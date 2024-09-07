@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useMemo, type CSSProperties } from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 import styles from "./Straordinari.module.css";
 import LineChart from "./LineChart";
 import { ApexOptions } from "apexcharts";
+import './i19n'; // Fix the import typo for i18n
 
 export type StraordinariType = {
   className?: string;
@@ -10,60 +12,66 @@ export type StraordinariType = {
   // Style props
   propPadding?: CSSProperties["padding"];
   // New props
-  ferialiData: number[];
-  festiviData: number[];
-};
-
-const lineChartOptions: ApexOptions = {
-  chart: {
-    height: 350,
-    type: 'line',
-    zoom: {
-      enabled: false
-    }
-  },
-  dataLabels: {
-    enabled: false
-  },
-  stroke: {
-    curve: 'smooth', // Changed from 'smooth' to 'straight'
-  },
-  title: {
-    text: 'Distribuzione dei Straordinari',
-    align: 'left'
-  },
-  grid: {
-    row: {
-      colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-      opacity: 0.5
-    },
-  },
-  xaxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  }
+  weekdaysData: number[];
+  holidaysData: number[];
 };
 
 const Straordinari: FunctionComponent<StraordinariType> = ({
   className = "",
   straordinari,
   propPadding,
-  ferialiData,
-  festiviData
+  weekdaysData,
+  holidaysData
 }) => {
+  const { t } = useTranslation(); // Initialize the translation function
+
   const straordinariStyle: CSSProperties = useMemo(() => ({
     padding: propPadding,
   }), [propPadding]);
 
   const chartSeries = [
     {
-      name: "Feriali",
-      data: ferialiData
+      name: t("straordinari.weekdays"), // Use translation key for "Weekdays"
+      data: weekdaysData
     },
     {
-      name: "Festivi",
-      data: festiviData
+      name: t("straordinari.holidays"), // Use translation key for "Holidays"
+      data: holidaysData
     }
   ];
+
+  const lineChartOptions: ApexOptions = {
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth', // You mentioned changing 'smooth' to 'straight', but I left it as smooth here.
+    },
+    title: {
+      text: t("straordinari.chartTitle"), // Translate the chart title
+      align: 'left'
+    },
+    grid: {
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
+      },
+    },
+    xaxis: {
+      categories: [
+        t("months.jan"), t("months.feb"), t("months.mar"), t("months.apr"),
+        t("months.may"), t("months.jun"), t("months.jul"), t("months.aug"),
+        t("months.sep"), t("months.oct"), t("months.nov"), t("months.dec")
+      ], // Translate month names
+    }
+  };
 
   return (
     <div

@@ -1,3 +1,4 @@
+// src/components/RiepilogoAnnuale.tsx
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import Valore from "./Valore";
 import Straordinari from "./Straordinari";
@@ -7,6 +8,8 @@ import axios from "axios";
 import Ferie from "./Ferie";
 import { BASE_URL } from '../config';
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
+import './i19n';  // This line should be added to ensure i18n configuration is loaded
 
 export type RiepilogoAnnualeType = {
   className?: string;
@@ -15,6 +18,7 @@ export type RiepilogoAnnualeType = {
 const RiepilogoAnnuale: FunctionComponent<RiepilogoAnnualeType> = ({
   className = "",
 }) => {
+  const { t } = useTranslation();
   const { user } = useContext(UserContext);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear().toString());
   const userId = user.userId;
@@ -30,7 +34,6 @@ const RiepilogoAnnuale: FunctionComponent<RiepilogoAnnualeType> = ({
     permessi: 0
   });
 
-  // Fetch available years for the user
   const fetchAvailableYears = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`);
@@ -101,11 +104,12 @@ const RiepilogoAnnuale: FunctionComponent<RiepilogoAnnualeType> = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
       >
-        <b className={styles.selectedYear}>{`Riassunto Annuale`}</b>
+        <b className={styles.selectedYear}>{t('annualSummary')}</b>
         <motion.select
           className={styles.yearDropdown}
           value={selectedYear}
-          onChange={handleYearChange}        >
+          onChange={handleYearChange}
+        >
           {availableYears.map((year) => (
             <option key={year} value={year}>
               {year}
@@ -118,7 +122,7 @@ const RiepilogoAnnuale: FunctionComponent<RiepilogoAnnualeType> = ({
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
       >
-        <b className={styles.riassunto}>Riassunto</b>
+        <b className={styles.riassunto}>{t('summary')}</b>
         <motion.div
           className={styles.yearDataContainer}
           initial={{ opacity: 0, y: 30 }}
@@ -126,28 +130,29 @@ const RiepilogoAnnuale: FunctionComponent<RiepilogoAnnualeType> = ({
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <Valore
-            ferie="Ferie"
-            immagine="/immagine-1@2x.png"
-            propGap="unset"
-            value={`${yearlyData.ferie}`}
-          />
-          <Valore
-            ferie="Straordinari Feriali"
+            ferie={t('overtimeWeekdays')}
             immagine="/immagine-4@2x.png"
             propGap="20px"
             value={formatTime(yearlyData.straordinariFeriali)}
           />
           <Valore
-            ferie="Straordinari Festivi"
+            ferie={t('overtimeHolidays')}
             immagine="/immagine-5@2x.png"
             propGap="20px"
             value={formatTime(yearlyData.straordinariFestivi)}
           />
           <Valore
-            ferie="Permessi"
+            ferie={t('permissions')}
             immagine="/immagine-6@2x.png"
             value={formatTime(yearlyData.permessi)}
           />
+          <Valore
+            ferie={t('vacation')}
+            immagine="/immagine-1@2x.png"
+            propGap="unset"
+            value={`${yearlyData.ferie}`}
+          />
+
         </motion.div>
       </motion.div>
       <motion.div
@@ -157,12 +162,12 @@ const RiepilogoAnnuale: FunctionComponent<RiepilogoAnnualeType> = ({
         transition={{ duration: 0.6, delay: 0.8 }}
       >
         <Straordinari
-          straordinari="Straordinari"
-          ferialiData={yearlyData.vectorFeriali}
-          festiviData={yearlyData.vectorFestivi}
+          straordinari={t('overtime')}
+          weekdaysData={yearlyData.vectorFeriali}
+          holidaysData={yearlyData.vectorFestivi}
         />
         <Ferie
-          ferie="Ferie"
+          ferie={t('vacation')}
           ferieData={yearlyData.vectorFerie}
         />
       </motion.div>

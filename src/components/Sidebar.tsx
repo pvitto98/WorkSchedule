@@ -1,13 +1,17 @@
+// src/components/Sidebar.tsx
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import styles from "./Sidebar.module.css";
+import { useTranslation } from 'react-i18next';
+import './i19n';
 
 export type SidebarType = {
   className?: string;
 };
 
 const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -50,7 +54,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
               src="/image-2@2x.png"
             />
           </div>
-          <b className={styles.tabellaLavoro}>TABELLA LAVORO</b>
+          <b className={styles.tabellaLavoro}>{t('workTable')}</b>
         </div>
       </div>
       {isOpen && (
@@ -89,7 +93,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                     src="/image-4@2x.png"
                   />
                   <div className={styles.dashboardLabel}>
-                    <b className={styles.dashboard1}>Dashboard</b>
+                    <b className={styles.dashboard1}>{t('dashboard')}</b>
                   </div>
                 </NavLink>
               </motion.div>
@@ -111,7 +115,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                     />
                   </div>
                   <div className={styles.label}>
-                    <b className={styles.addData}>Aggiungi dato</b>
+                    <b className={styles.addData}>{t('addData')}</b>
                   </div>
                 </NavLink>
               </motion.div>
@@ -133,7 +137,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                     />
                   </div>
                   <div className={styles.label}>
-                    <b className={styles.addData}>Tabella Dati</b>
+                    <b className={styles.addData}>{t('dataTable')}</b>
                   </div>
                 </NavLink>
               </motion.div>
@@ -154,7 +158,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
                     />
                   </div>
                   <div className={styles.label}>
-                    <b className={styles.logOut}>Log out</b>
+                    <b className={styles.logOut}>{t('logOut')}</b>
                   </div>
                 </NavLink>
               </motion.div>

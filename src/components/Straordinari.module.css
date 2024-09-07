@@ -48,5 +48,9 @@
     gap: var(--gap-10xl);
     padding: 10px;
     justify-content: center;
+    margin: 10px;
+  }
+  .straordinari {
+    min-width: 200px;
   }
 }

@@ -1,22 +1,24 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Valore from "./Valore";
 import styles from "./RiepilogoMensile.module.css";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 import { BASE_URL } from '../config';
+import './i19n';
 
 export type RiepilogoMensileType = {
   className?: string;
 };
 
 const months = [
-  "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
-  "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
 ];
 
-const getItalianMonthName = (monthIndex: number) => {
-  return months[monthIndex];
+const getMonthName = (monthIndex: number, t: any) => {
+  return t(`monthNames.${months[monthIndex]}`);
 };
 
 const formatTime = (minutes: number) => {
@@ -28,11 +30,11 @@ const formatTime = (minutes: number) => {
 const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
   className = "",
 }) => {
+  const { t } = useTranslation();
   const { user } = useContext(UserContext);
   const currentMonthIndex = new Date().getMonth();
-  const currentItalianMonthName = getItalianMonthName(currentMonthIndex);
-  
-  const [selectedMonth, setSelectedMonth] = useState(currentItalianMonthName);  
+
+  const [selectedMonthIndex, setSelectedMonthIndex] = useState(currentMonthIndex);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear().toString());
   const [monthlyData, setMonthlyData] = useState({
     ferie: 0,
@@ -43,12 +45,11 @@ const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
 
   const [availableYears, setAvailableYears] = useState<string[]>([new Date().getFullYear().toString()]);
 
-  const fetchMonthlyData = async (month: string, year: string) => {
+  const fetchMonthlyData = async (monthIndex: number, year: string) => {
     try {
       const userId = user.userId;
-      const monthIndex = months.indexOf(month) + 1;
-      const response = await axios.get(`${BASE_URL}/api/monthlyaggregates/${userId}/${year}/${monthIndex}`);
-  
+      const response = await axios.get(`${BASE_URL}/api/monthlyaggregates/${userId}/${year}/${monthIndex + 1}`);
+
       if (response.status === 200) {
         setMonthlyData(response.data);
       } else if (response.status === 404) {
@@ -60,7 +61,7 @@ const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
         });
       }
     } catch (error) {
-      console.error("Failed to fetch monthly data", error);
+      console.error(t("fetchDataError"), error);
       setMonthlyData({
         ferie: -1,
         malattia: -1,
@@ -82,13 +83,13 @@ const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
         }
       }
     } catch (error) {
-      console.error("Failed to fetch available years", error);
+      console.error(t("fetchYearsError"), error);
     }
   };
 
   useEffect(() => {
-    fetchMonthlyData(selectedMonth, selectedYear);
-  }, [selectedMonth, selectedYear]);
+    fetchMonthlyData(selectedMonthIndex, selectedYear);
+  }, [selectedMonthIndex, selectedYear]);
 
   useEffect(() => {
     if (user.userId) {
@@ -97,7 +98,7 @@ const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
   }, [user.userId]);
 
   const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedMonth(event.target.value);
+    setSelectedMonthIndex(Number(event.target.value));
   };
 
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -105,27 +106,27 @@ const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
   };
 
   return (
-    <motion.section 
+    <motion.section
       className={[styles.RiepilogoAnnuale, className].join(" ")}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <motion.div 
+      <motion.div
         className={styles.dateSelector}
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
-        <b className={styles.selectedDate}>{`Riassunto Mensile`}</b>
+        <b className={styles.selectedDate}>{t("monthlySummary")}</b>
         <div className={styles.dropdownContainer}>
           <motion.select
             className={styles.monthDropdown}
-            value={selectedMonth}
+            value={selectedMonthIndex}
             onChange={handleMonthChange}
           >
-            {months.map((month) => (
-              <option key={month} value={month}>
-                {month}
+            {months.map((_, index) => (
+              <option key={index} value={index}>
+                {t(`monthNames.${months[index]}`)}
               </option>
             ))}
           </motion.select>
@@ -143,39 +144,40 @@ const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
           </motion.select>
         </div>
       </motion.div>
-      <motion.nav 
+      <motion.nav
         className={styles.monthData}
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         <Valore
-          ferie="Ferie"
-          immagine="/immagine-1@2x.png"
-          propGap="unset"
-          value={`${monthlyData.ferie}`}
-        />
-        <Valore
-          ferie="Malattia"
-          immagine="/immagine-1@2x.png"
-          propGap="unset"
-          value={`${monthlyData.malattia}`}
-        />
-        <Valore
-          ferie="Straordinari Feriali"
+          ferie={t("overtimeWeekdays")}
           immagine="/immagine-1@2x.png"
           propGap="unset"
           value={formatTime(monthlyData.straordinariFeriali)}
         />
         <Valore
-          ferie="Straordinari Festivi"
+          ferie={t("overtimeHolidays")}
           immagine="/immagine-2@2x.png"
           propGap="unset"
           value={formatTime(monthlyData.straordinariFestivi)}
+        />
+        <Valore
+          ferie={t("vacation")}
+          immagine="/immagine-1@2x.png"
+          propGap="unset"
+          value={`${monthlyData.ferie}`}
+        />
+        <Valore
+          ferie={t("sickLeave")}
+          immagine="/immagine-1@2x.png"
+          propGap="unset"
+          value={`${monthlyData.malattia}`}
         />
       </motion.nav>
     </motion.section>
   );
 };
+
 
 export default RiepilogoMensile;

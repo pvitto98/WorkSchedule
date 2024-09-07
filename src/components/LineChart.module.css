@@ -12,9 +12,8 @@
   
   @media (max-width: 450px) {
     .chartContainer {
-      width: 95%;
-      height: 300px;
+      width: 100%;
+      height: 250px;
     }
-
   }
-  
+
