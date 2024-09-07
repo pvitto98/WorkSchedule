@@ -15,6 +15,7 @@
     "axios": "^1.7.2",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
+    "framer-motion": "^11.5.4",
     "luxon": "^3.4.4",
     "mongoose": "^8.5.1",
     "mongose": "^0.0.2-security",

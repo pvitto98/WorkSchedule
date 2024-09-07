@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import styles from "./Sidebar.module.css";
 
 export type SidebarType = {
@@ -10,30 +11,32 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+    if (window.innerWidth < 900) {
+      setIsOpen(!isOpen);
+    }
   };
 
-  // Set the initial state based on the screen size
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024) { // Assuming 1024px is the breakpoint for desktop
+      if (window.innerWidth >= 900) {
         setIsOpen(true);
       } else {
         setIsOpen(false);
       }
     };
 
-    // Set the initial state
     handleResize();
+    window.addEventListener("resize", handleResize);
 
-    // Add event listener for window resize
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup event listener on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
     <div className={`${styles.sidebar} ${className} ${isOpen ? styles.open : ""}`}>
@@ -59,82 +62,103 @@ const Sidebar: FunctionComponent<SidebarType> = ({ className = "" }) => {
             src="/vector-6.svg"
           />
           <div className={styles.menuWrapper}>
-            <div className={styles.menu}>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
-                }
-                onClick={toggleSidebar} // Close sidebar when clicked
-              >
-                <img
-                  className={styles.image4Icon}
-                  loading="lazy"
-                  alt=""
-                  src="/image-4@2x.png"
-                />
-                <div className={styles.dashboardLabel}>
-                  <b className={styles.dashboard1}>Dashboard</b>
-                </div>
-              </NavLink>
-              <NavLink
-                to="/insertdata"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
-                }
-                onClick={toggleSidebar} // Close sidebar when clicked
-              >
-                <div className={styles.iconWrapper}>
+            <motion.div
+              className={styles.menu}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
+              <motion.div variants={buttonVariants}>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
+                  }
+                  onClick={toggleSidebar}
+                >
                   <img
-                    className={styles.icon}
+                    className={styles.image4Icon}
                     loading="lazy"
                     alt=""
-                    src="/ioniconrrocketsharp.svg"
+                    src="/image-4@2x.png"
                   />
-                </div>
-                <div className={styles.label}>
-                  <b className={styles.addData}>Aggiungi dato</b>
-                </div>
-              </NavLink>
-              <NavLink
-                to="/monthlydatascreen"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
-                }
-                onClick={toggleSidebar} // Close sidebar when clicked
-              >
-                <div className={styles.iconWrapper}>
-                  <img
-                    className={styles.icon}
-                    loading="lazy"
-                    alt=""
-                    src="/ioniconrrocketsharp.svg"
-                  />
-                </div>
-                <div className={styles.label}>
-                  <b className={styles.addData}>Tabella Dati</b>
-                </div>
-              </NavLink>
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
-                }
-                onClick={toggleSidebar} // Close sidebar when clicked
-              >
-                <div className={styles.iconWrapper}>
-                  <img
-                    className={styles.icon}
-                    loading="lazy"
-                    alt=""
-                    src="/ioniconrrocketsharp.svg"
-                  />
-                </div>
-                <div className={styles.label}>
-                  <b className={styles.logOut}>Log out</b>
-                </div>
-              </NavLink>
-            </div>
+                  <div className={styles.dashboardLabel}>
+                    <b className={styles.dashboard1}>Dashboard</b>
+                  </div>
+                </NavLink>
+              </motion.div>
+
+              <motion.div variants={buttonVariants}>
+                <NavLink
+                  to="/insertdata"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
+                  }
+                  onClick={toggleSidebar}
+                >
+                  <div className={styles.iconWrapper}>
+                    <img
+                      className={styles.icon2}
+                      loading="lazy"
+                      alt=""
+                      src="/add_button.svg"
+                    />
+                  </div>
+                  <div className={styles.label}>
+                    <b className={styles.addData}>Aggiungi dato</b>
+                  </div>
+                </NavLink>
+              </motion.div>
+
+              <motion.div variants={buttonVariants}>
+                <NavLink
+                  to="/monthlydatascreen"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
+                  }
+                  onClick={toggleSidebar}
+                >
+                  <div className={styles.iconWrapper}>
+                    <img
+                      className={styles.icon2}
+                      loading="lazy"
+                      alt=""
+                      src="/table_icon.svg"
+                    />
+                  </div>
+                  <div className={styles.label}>
+                    <b className={styles.addData}>Tabella Dati</b>
+                  </div>
+                </NavLink>
+              </motion.div>
+              <motion.div variants={buttonVariants}>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active} ${styles.menuItem}` : styles.menuItem
+                  }
+                  onClick={toggleSidebar}
+                >
+                  <div className={styles.iconWrapper}>
+                    <img
+                      className={styles.icon}
+                      loading="lazy"
+                      alt=""
+                      src="/ioniconrrocketsharp.svg"
+                    />
+                  </div>
+                  <div className={styles.label}>
+                    <b className={styles.logOut}>Log out</b>
+                  </div>
+                </NavLink>
+              </motion.div>
+            </motion.div>
           </div>
         </>
       )}

@@ -433,7 +433,7 @@
   box-sizing: border-box;
   max-width: 100%;
 }
-.analyticsCards,
+.RiepilogoAnnuale,
 .valoreParent {
   align-self: stretch;
   max-width: 100%;
@@ -450,7 +450,7 @@
   font-size: var(--font-size-xs);
   color: var(--gray-gray-400);
 }
-.analyticsCards {
+.RiepilogoAnnuale {
   overflow: hidden;
   display: none;
   flex-direction: column;
@@ -785,7 +785,7 @@
   gap: var(--gap-5xl);
   min-width: 335px;
 }
-.analyticsCards1,
+.RiepilogoMensile,
 .graficiaggregati {
   align-self: stretch;
   align-items: flex-start;
@@ -800,7 +800,7 @@
   box-sizing: border-box;
   gap: var(--gap-31xl);
 }
-.analyticsCards1 {
+.RiepilogoMensile {
   overflow: hidden;
   display: none;
   flex-direction: column;

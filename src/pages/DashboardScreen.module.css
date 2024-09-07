@@ -110,7 +110,7 @@
 @media screen and (max-width: 900px) {
   .breadcrumbParent,
   .dashboardScreen {
-    gap: var(--gap-6xl);
+    gap: 50px;
     flex-wrap: wrap;
   }
 }

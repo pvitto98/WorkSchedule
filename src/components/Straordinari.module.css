@@ -23,20 +23,30 @@
   overflow: hidden;
   flex-direction: row;
   align-items: center;
+  font-family: var(--font-helvetica);
+  box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.25);
+  border-radius: var(--br-mini);
+  background-color: var(--blackampwhite-white);
+  padding: 20px;
 }
 .straordinari {
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--gap-5xl);
+  /* gap: var(--gap-5xl); */
   min-width: 335px;
   text-align: left;
   font-size: var(--font-size-lg-8);
   color: var(--gray-gray-700);
   font-family: var(--font-helvetica);
+  gap: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 @media screen and (max-width: 450px) {
   .graficostraordinari {
     gap: var(--gap-10xl);
+    padding: 10px;
+    justify-content: center;
   }
 }

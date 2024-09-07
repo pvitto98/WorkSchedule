@@ -29,7 +29,7 @@ const lineChartOptions: ApexOptions = {
     curve: 'smooth', // Changed from 'smooth' to 'straight'
   },
   title: {
-    text: 'Straordinari Trends',
+    text: 'Distribuzione dei Straordinari',
     align: 'left'
   },
   grid: {

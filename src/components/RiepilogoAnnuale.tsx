@@ -1,24 +1,22 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import Valore from "./Valore";
 import Straordinari from "./Straordinari";
-import styles from "./AnalyticsCards.module.css";
-import { UserContext } from "../UserContext"; // Assume UserContext is set up in a higher-level component
+import styles from "./RiepilogoAnnuale.module.css";
+import { UserContext } from "../UserContext";
 import axios from "axios";
 import Ferie from "./Ferie";
 import { BASE_URL } from '../config';
+import { motion } from "framer-motion";
 
-export type AnalyticsCardsType = {
+export type RiepilogoAnnualeType = {
   className?: string;
 };
 
-const years = ["2023", "2024", "2025", "2026", "2027"];
-
-const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
+const RiepilogoAnnuale: FunctionComponent<RiepilogoAnnualeType> = ({
   className = "",
 }) => {
   const { user } = useContext(UserContext);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear().toString());
-  const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
   const userId = user.userId;
   const [availableYears, setAvailableYears] = useState<string[]>([new Date().getFullYear().toString()]);
 
@@ -35,12 +33,10 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
   // Fetch available years for the user
   const fetchAvailableYears = async () => {
     try {
-      const userId = user.userId;
-      const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`); // Correct endpoint
+      const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`);
       if (response.status === 200) {
-        const years = response.data.years.sort((a: number, b: number) => b - a)
+        const years = response.data.years.sort((a: number, b: number) => b - a);
         setAvailableYears(years);
-        // Set the selected year to the most recent year by default
         setSelectedYear(years[0]);
       }
     } catch (error) {
@@ -50,11 +46,9 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
 
   const fetchYearlyData = async () => {
     try {
-      console.log("fetchYearlyData anno: " + selectedYear )
       const response = await axios.get(`${BASE_URL}/api/yearlyaggregates/${userId}/${selectedYear}`);
       const data = response.data;
 
-      // Sum the straordinario values for each month
       const totalStraordinarioFestivo = data.straordinariFestivi.reduce((sum: number, value: number) => sum + value, 0);
       const totalStraordinarioFeriale = data.straordinariFeriali.reduce((sum: number, value: number) => sum + value, 0);
       const totalFerie = data.ferie.reduce((sum: number, value: number) => sum + value, 0);
@@ -73,25 +67,22 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
     }
   };
 
-  // Fetch available years on mount
+  useEffect(() => {
+    if (user.userId) {
+      fetchAvailableYears();
+    }
+  }, [user.userId]);
+
   useEffect(() => {
     if (user.userId) {
       fetchYearlyData();
     }
-  }, [user.userId , selectedYear]);
-
-  useEffect(() => {
-    if (userId) {
-      fetchAvailableYears();
-    }
-  }, [userId]);
+  }, [user.userId, selectedYear]);
 
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedYear(event.target.value);
-    setIsYearDropdownOpen(false);
   };
 
-  // Helper function to format minutes as hours and minutes
   const formatTime = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
@@ -99,32 +90,41 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
   };
 
   return (
-    <section className={[styles.analyticsCards, className].join(" ")}>
-      <div className={styles.yearSelector}>
-        <b className={styles.selectedYear}>{`Anno ${selectedYear}`}</b>
-        <b
-          className={styles.cambiaAnno}
-          onClick={() => setIsYearDropdownOpen(!isYearDropdownOpen)}
-        >
-          Cambia anno
-        </b>
-        {isYearDropdownOpen && (
-          <select
-            className={styles.yearDropdown}
-            value={selectedYear}
-            onChange={handleYearChange}
-          >
-            {availableYears.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
-      <div className={styles.yearSummary}>
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={[styles.RiepilogoAnnuale, className].join(" ")}
+    >
+      <motion.div
+        className={styles.yearSelector}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+      >
+        <b className={styles.selectedYear}>{`Riassunto Annuale`}</b>
+        <motion.select
+          className={styles.yearDropdown}
+          value={selectedYear}
+          onChange={handleYearChange}        >
+          {availableYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </motion.select>
+      </motion.div>
+      <motion.div
+        className={styles.yearSummary}
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+      >
         <b className={styles.riassunto}>Riassunto</b>
-        <div className={styles.yearDataContainer}>
+        <motion.div
+          className={styles.yearDataContainer}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
           <Valore
             ferie="Ferie"
             immagine="/immagine-1@2x.png"
@@ -148,9 +148,14 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
             immagine="/immagine-6@2x.png"
             value={formatTime(yearlyData.permessi)}
           />
-        </div>
-      </div>
-      <div className={styles.graficiaggregati}>
+        </motion.div>
+      </motion.div>
+      <motion.div
+        className={styles.graficiaggregati}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+      >
         <Straordinari
           straordinari="Straordinari"
           ferialiData={yearlyData.vectorFeriali}
@@ -158,12 +163,11 @@ const AnalyticsCards: FunctionComponent<AnalyticsCardsType> = ({
         />
         <Ferie
           ferie="Ferie"
-          ferieData={yearlyData.vectorFerie} // Pass the vectorFerie data
+          ferieData={yearlyData.vectorFerie}
         />
-
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
-export default AnalyticsCards;
+export default RiepilogoAnnuale;

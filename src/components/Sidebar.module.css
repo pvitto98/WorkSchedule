@@ -146,6 +146,7 @@
   background-color: var(--color-whitesmoke);
   transition: transform 0.3s ease, top 0.3s ease;
   overflow: hidden;
+  
 }
 
 .open {
@@ -200,6 +201,10 @@
   gap: var(--gap-xs);
   color: var(--gray-gray-400);
 }
+.icon2{
+  height: 30px;
+  width: 30.5px;
+}
 
 
 @media (max-width: 768px) {
@@ -228,6 +233,7 @@
   .menuWrapper{
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 
   }
 }

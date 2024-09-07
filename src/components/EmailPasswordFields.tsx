@@ -97,12 +97,6 @@ const EmailPasswordFields: FunctionComponent<EmailPasswordFieldsType> = ({
             </div>
           </div>
         </div>
-        {/* <div className={styles.switchbaseParent}>
-          <div className={styles.switchbase}>
-            <div className={styles.switchbaseChild} />
-          </div>
-          <div className={styles.ricordami}>Ricordami</div>
-        </div> */}
         <button type="submit" className={styles.accedi}>
           <div className={styles.widthStructure}>
             <div className={styles.heightStructure}>

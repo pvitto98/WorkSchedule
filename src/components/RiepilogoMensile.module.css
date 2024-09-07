@@ -3,12 +3,14 @@
   position: relative;
   line-height: 140%;
 }
+
 .cambiaMese {
   font-size: var(--font-size-base);
   display: inline-block;
   color: var(--color-sienna);
   min-width: 104px;
 }
+
 .monthSelector {
   align-self: stretch;
   display: flex;
@@ -17,7 +19,8 @@
   justify-content: space-between;
   gap: var(--gap-xl);
 }
-.analyticsCards,
+
+.RiepilogoAnnuale,
 .monthData {
   align-self: stretch;
   display: flex;
@@ -26,21 +29,23 @@
   font-family: var(--font-helvetica);
   flex-wrap: wrap;
 }
+
 .monthData {
   margin: 0;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   padding: var(--padding-3xs);
   box-sizing: border-box;
   gap: var(--gap-xl);
   font-size: var(--font-size-xs);
   color: var(--gray-gray-400);
   row-gap: var(--gap-xl);
+  gap: 20px;
 
 }
-.analyticsCards {
+
+.RiepilogoAnnuale {
   overflow: hidden;
   flex-direction: column;
   align-items: flex-start;
@@ -49,23 +54,89 @@
   font-size: var(--font-size-11xl);
   color: var(--gray-gray-700);
 }
+
+.dateSelector {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+}
+
+.dropdownContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.selectedDate {
+  font-size: 35px;
+}
+
+.monthDropdown,
+.yearDropdown {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.monthDropdown:focus,
+.yearDropdown:focus {
+  border-color: #007bff;
+  /* Highlight border color on focus */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  /* Focus shadow */
+  outline: none;
+}
+
+.monthDropdown option,
+.yearDropdown option {
+  padding: 8px;
+}
+
+/* Optional: Add custom arrow styles */
+.monthDropdown::after,
+.yearDropdown::after {
+  content: '▼';
+  /* Downward arrow */
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #333;
+}
+
+
 @media screen and (max-width: 900px) {
   .febbraio2024 {
     font-size: var(--font-size-5xl);
     line-height: 34px;
   }
 }
+
 @media screen and (max-width: 450px) {
   .febbraio2024 {
     font-size: var(--font-size-lg);
     line-height: 25px;
   }
+
   .monthSelector {
     flex-wrap: wrap;
   }
 
   .monthData {
     justify-content: center;
-  
+
+  }
+
+  .dateSelector {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    row-gap: 20px;
   }
 }

@@ -29,7 +29,7 @@ const lineChartOptions: ApexOptions = {
     dashArray: 5, // Creates a dashed line effect
   },
   title: {
-    text: 'Ferie Trends',
+    text: 'Distribuzione delle ferie',
     align: 'left'
   },
   grid: {

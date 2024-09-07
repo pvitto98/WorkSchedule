@@ -16,7 +16,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--gap-xl);
-  font-size: var(--font-size-11xl);
+  font-size: 35px;
 }
 .riassunto {
   position: relative;
@@ -37,6 +37,7 @@
   font-size: var(--font-size-xs);
   color: var(--gray-gray-400);
   row-gap: var(--gap-xl);
+  gap: 20px;
 
 }
 .yearSummary {
@@ -44,7 +45,7 @@
   justify-content: flex-start;
   gap: var(--gap-5xl);
 }
-.analyticsCards,
+.RiepilogoAnnuale,
 .graficiaggregati,
 .yearSummary {
   align-self: stretch;
@@ -59,8 +60,9 @@
   padding: 0 var(--padding-9xs) 0 0;
   box-sizing: border-box;
   gap: 50px 48px;
+  margin-bottom: 20px;
 }
-.analyticsCards {
+.RiepilogoAnnuale {
   overflow: hidden;
   flex-direction: column;
   justify-content: center;
@@ -70,6 +72,46 @@
   color: var(--gray-gray-700);
   font-family: var(--font-helvetica);
 }
+
+.monthDropdown,
+.yearDropdown {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.monthDropdown:focus,
+.yearDropdown:focus {
+  border-color: #007bff; /* Highlight border color on focus */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Focus shadow */
+  outline: none;
+}
+
+.monthDropdown option,
+.yearDropdown option {
+  padding: 8px;
+}
+
+/* Optional: Add custom arrow styles */
+.monthDropdown::after,
+.yearDropdown::after {
+  content: '▼'; /* Downward arrow */
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #333;
+}
+.titoloGrafico{
+  font-size: 20px;
+}
+
 @media screen and (max-width: 900px) {
   .anno2024 {
     font-size: var(--font-size-5xl);
@@ -86,6 +128,7 @@
   }
   .yearSelector {
     flex-wrap: wrap;
+    justify-content: center;
   }
   .yearDataContainer {
     max-width: 100%;
@@ -93,4 +136,8 @@
     justify-content: center;
 
   }
+  .titoloGrafico{
+    font-size: 18.8px;
+  }
+  
 }

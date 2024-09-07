@@ -1,5 +1,6 @@
 .monthlyDataScreen {
     padding: 20px;
+    
   }
   
   .selector {
@@ -10,24 +11,65 @@
   
   .selector label {
     margin-right: 10px;
+    font-weight: bold;
+
   }
   
   .selector select {
     padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
   }
   
   .dataTable {
     width: 100%;
     border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
   .dataTable th, .dataTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    text-align: left;
   }
   
   .dataTable th {
     background-color: #f2f2f2;
-    text-align: left;
-  }
+    font-weight: bold;
+}
   
+.dataTable tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+  
+.dataTable td button {
+    background: none;
+    border: none;
+    color: #d9534f;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dataTable td button:hover {
+    color: #c9302c;
+}
+
+.columnToggle {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.columnToggle label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}

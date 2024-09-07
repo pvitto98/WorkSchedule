@@ -1,8 +1,10 @@
 .ferie {
   position: relative;
-  line-height: 150%;
   display: inline-block;
   min-width: 54px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.1;
 }
 .value {
   width: calc(100% - 0px);
@@ -10,16 +12,16 @@
   outline: 0;
   background-color: transparent;
   align-self: stretch;
-  height: 25px;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
   font-family: var(--font-helvetica);
-  font-weight: 700;
+  font-weight: 500;
   font-size: var(--font-size-lg);
   color: black;
   min-width: 47px;
+  font-size: 20px;
 }
 .valorecontent {
   overflow: hidden;
@@ -28,16 +30,17 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  gap: var(--gap-12xs);
+  gap: 10px;
 }
 .immagineIcon {
-  height: 56.5px;
-  width: 56.5px;
+  height: 80%;
+  width: auto;
   position: relative;
   object-fit: contain;
 }
 .valore {
-  min-width: 250px; /* Ensure it doesn't shrink below 250px */
+  min-width: 280px; /* Ensure it doesn't shrink below 250px */
+  height: 90px;
   width: auto; /* Allow it to grow */
   max-width: 100%; /* Ensure it doesn't grow beyond the container width */
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.25);
@@ -57,6 +60,8 @@
   font-size: var(--font-size-xs);
   color: black;
   font-family: var(--font-helvetica);
+  flex: 1;
+
 }
 @media screen and (max-width: 450px) {
   .valore {

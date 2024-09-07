@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Valore from "./Valore";
-import styles from "./AnalyticsCards1.module.css";
-import axios from "axios"; // Import axios for HTTP requests
-import { UserContext } from "../UserContext"; // Assume UserContext is set up in a higher-level component
+import styles from "./RiepilogoMensile.module.css";
+import axios from "axios";
+import { UserContext } from "../UserContext";
 import { BASE_URL } from '../config';
 
-export type AnalyticsCards1Type = {
+export type RiepilogoMensileType = {
   className?: string;
 };
 
@@ -14,23 +15,17 @@ const months = [
   "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
 ];
 
-// Helper function to get the Italian month name
 const getItalianMonthName = (monthIndex: number) => {
-  const monthNames = [
-    "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
-    "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
-  ];
-  return monthNames[monthIndex];
+  return months[monthIndex];
 };
 
-  // Helper function to format minutes as hours and minutes
-  const formatTime = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours}h ${Math.floor(mins)}m`;
-  };
+const formatTime = (minutes: number) => {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${hours}h ${Math.floor(mins)}m`;
+};
 
-const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
+const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
   className = "",
 }) => {
   const { user } = useContext(UserContext);
@@ -39,8 +34,6 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
   
   const [selectedMonth, setSelectedMonth] = useState(currentItalianMonthName);  
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear().toString());
-  const [isMonthDropdownOpen, setIsMonthDropdownOpen] = useState(false);
-  const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
   const [monthlyData, setMonthlyData] = useState({
     ferie: 0,
     malattia: 0,
@@ -50,18 +43,15 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
 
   const [availableYears, setAvailableYears] = useState<string[]>([new Date().getFullYear().toString()]);
 
-
   const fetchMonthlyData = async (month: string, year: string) => {
     try {
-      console.log('request for ' + month + ' ' + year);
-      const userId = user.userId; // Assume user is defined somewhere in your component
-      const monthIndex = months.indexOf(month) + 1; // Convert month name to month index
+      const userId = user.userId;
+      const monthIndex = months.indexOf(month) + 1;
       const response = await axios.get(`${BASE_URL}/api/monthlyaggregates/${userId}/${year}/${monthIndex}`);
   
       if (response.status === 200) {
         setMonthlyData(response.data);
       } else if (response.status === 404) {
-        // Handle no data found
         setMonthlyData({
           ferie: -1,
           malattia: -1,
@@ -71,7 +61,6 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
       }
     } catch (error) {
       console.error("Failed to fetch monthly data", error);
-      // Handle server error by setting all values to "x"
       setMonthlyData({
         ferie: -1,
         malattia: -1,
@@ -81,28 +70,26 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
     }
   };
 
-    // Fetch available years for the user
-    const fetchAvailableYears = async () => {
-      try {
-        const userId = user.userId;
-        const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`); // Correct endpoint
-        if (response.status === 200) {
-          const years = response.data.years.sort((a: number, b: number) => b - a);
-          setAvailableYears(years);
-          if (years.length > 0) {
-            setSelectedYear(years[0]);
-          }
+  const fetchAvailableYears = async () => {
+    try {
+      const userId = user.userId;
+      const response = await axios.get(`${BASE_URL}/api/availableYears/${userId}`);
+      if (response.status === 200) {
+        const years = response.data.years.sort((a: number, b: number) => b - a);
+        setAvailableYears(years);
+        if (years.length > 0) {
+          setSelectedYear(years[0]);
         }
-      } catch (error) {
-        console.error("Failed to fetch available years", error);
       }
-    };
+    } catch (error) {
+      console.error("Failed to fetch available years", error);
+    }
+  };
 
   useEffect(() => {
     fetchMonthlyData(selectedMonth, selectedYear);
   }, [selectedMonth, selectedYear]);
-  
-  // Fetch available years on mount
+
   useEffect(() => {
     if (user.userId) {
       fetchAvailableYears();
@@ -111,28 +98,27 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
 
   const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedMonth(event.target.value);
-    setIsMonthDropdownOpen(false);
   };
 
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedYear(event.target.value);
-    setIsYearDropdownOpen(false);
   };
 
-  
-
   return (
-    <section className={[styles.analyticsCards, className].join(" ")}>
-      <div className={styles.monthSelector}>
-        <b className={styles.selectedDate}>{`${selectedMonth} ${selectedYear}`}</b>
-        <b
-          className={styles.cambiaMese}
-          onClick={() => setIsMonthDropdownOpen(!isMonthDropdownOpen)}
-        >
-          Cambia mese
-        </b>
-        {isMonthDropdownOpen && (
-          <select
+    <motion.section 
+      className={[styles.RiepilogoAnnuale, className].join(" ")}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <motion.div 
+        className={styles.dateSelector}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+      >
+        <b className={styles.selectedDate}>{`Riassunto Mensile`}</b>
+        <div className={styles.dropdownContainer}>
+          <motion.select
             className={styles.monthDropdown}
             value={selectedMonth}
             onChange={handleMonthChange}
@@ -142,29 +128,27 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
                 {month}
               </option>
             ))}
-          </select>
-        )}
-        <b
-          className={styles.cambiaMese}
-          onClick={() => setIsYearDropdownOpen(!isYearDropdownOpen)}
-        >
-          Cambia anno
-        </b>
-        {isYearDropdownOpen && (
-          <select
+          </motion.select>
+          <motion.select
             className={styles.yearDropdown}
             value={selectedYear}
             onChange={handleYearChange}
+            transition={{ duration: 0.3 }}
           >
             {availableYears.map((year) => (
               <option key={year} value={year}>
                 {year}
               </option>
             ))}
-          </select>
-        )}
-      </div>
-      <nav className={styles.monthData}>
+          </motion.select>
+        </div>
+      </motion.div>
+      <motion.nav 
+        className={styles.monthData}
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+      >
         <Valore
           ferie="Ferie"
           immagine="/immagine-1@2x.png"
@@ -182,16 +166,16 @@ const AnalyticsCards1: FunctionComponent<AnalyticsCards1Type> = ({
           immagine="/immagine-1@2x.png"
           propGap="unset"
           value={formatTime(monthlyData.straordinariFeriali)}
-          />
+        />
         <Valore
           ferie="Straordinari Festivi"
           immagine="/immagine-2@2x.png"
           propGap="unset"
           value={formatTime(monthlyData.straordinariFestivi)}
-          />
-      </nav>
-    </section>
+        />
+      </motion.nav>
+    </motion.section>
   );
 };
 
-export default AnalyticsCards1;
+export default RiepilogoMensile;

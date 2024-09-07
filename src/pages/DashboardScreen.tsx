@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
-import AnalyticsCards1 from "../components/AnalyticsCards1";
-import AnalyticsCards from "../components/AnalyticsCards";
+import RiepilogoMensile from "../components/RiepilogoMensile";
+import RiepilogoAnnuale from "../components/RiepilogoAnnuale";
 import styles from "./DashboardScreen.module.css";
 
 const DashboardScreen: FunctionComponent = () => {
   return (
     <div className={styles.dashboardScreen}>
-      <AnalyticsCards1 />
-      <AnalyticsCards />
+      <RiepilogoMensile />
+      <RiepilogoAnnuale />
     </div>
   );
 };

@@ -93,10 +93,10 @@ const InsertData: FunctionComponent = () => {
         setEndTime("");
         setSpecialDay("");
         setNotes("");
-        alert("Data inserted successfully!");
+        alert("Giornata inserita correttamente!");
       } catch (error) {
         console.error("Error inserting data:", error);
-        alert("Failed to insert data. Please try again.");
+        alert("Errore! Assicurati di aver inserito tutti i valori necessari.");
       }
     };
   return (
