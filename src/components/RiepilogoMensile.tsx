@@ -153,25 +153,21 @@ const RiepilogoMensile: FunctionComponent<RiepilogoMensileType> = ({
         <Valore
           ferie={t("overtimeWeekdays")}
           immagine="/immagine-1@2x.png"
-          propGap="unset"
           value={formatTime(monthlyData.straordinariFeriali)}
         />
         <Valore
           ferie={t("overtimeHolidays")}
           immagine="/immagine-2@2x.png"
-          propGap="unset"
           value={formatTime(monthlyData.straordinariFestivi)}
         />
         <Valore
           ferie={t("vacation")}
           immagine="/immagine-1@2x.png"
-          propGap="unset"
           value={`${monthlyData.ferie}`}
         />
         <Valore
           ferie={t("sickLeave")}
           immagine="/immagine-1@2x.png"
-          propGap="unset"
           value={`${monthlyData.malattia}`}
         />
       </motion.nav>

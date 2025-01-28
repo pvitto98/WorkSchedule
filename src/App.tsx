@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, useNavigationType, useLocation } from "react-router-dom";
+
 import Layout from "./components/Layout";
 import DashboardScreen from "./pages/DashboardScreen";
 import Login from "./pages/Login";
@@ -67,7 +68,7 @@ function App() {
         <Route index element={<DashboardScreen />} />
         <Route path="insertdata" element={<InsertData />} />
         <Route path="monthlydatascreen" element={<MonthlyDataScreen />} />
-        <Route path="restoredata" element={<FileUploader />} />
+        {/* <Route path="restoredata" element={<FileUploader />} /> */}
       </Route>
       <Route path="/registrazione" element={<Registrazione />} />
       <Route path="/festivedays" element={<FestiveDays />} />

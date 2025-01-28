@@ -1,12 +1,13 @@
 import { FunctionComponent, useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+
 import Sidebar from "../components/Sidebar";
 import Breadcrumb from "../components/Breadcrumb";
 import styles from "./Layout.module.css";
 import { UserContext } from "../UserContext";
 
 const Layout: FunctionComponent = () => {
-  const { user } = useContext(UserContext); // Assuming UserContext provides an object with a 'user' property
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
